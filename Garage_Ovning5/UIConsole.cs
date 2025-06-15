@@ -8,22 +8,46 @@ namespace Garage_Ovning5
 {
     internal class UIConsole
     {
-        //Gissar på att menyn ska flyttas någon annanstans. oklarrt var. Kolla LTUGame
 
-        //Var ska jag validera användarens input?
+
+
+
 
 
         //Huvudmeny
+        public void ShowMainMenu()
+        {
+            string message = "Välkommen till garageapplikationen. Du kommer nu få ett antal alternativ: \n1) Skapa ett nytt garage " +
+                "\n2) Parkera eller ta bort fordon från garage \n3) Lista samtliga fordon i garage \n4) Sök efter fordon i garage \n5) Stäng applikationen"; //{garageNamn}lägg till namn på garage?
+                                                                                                                                                             // char input = ReturnChar(message); 
+            char input = '1';
 
 
+            switch (input)
+            {
 
+                case '1':
+                    NewGarage();
+                    break;
 
+                case '2':
+                    Undermeny();
+                    break;
+                case '3':
+                    ShowAllVehicles();
+                    break;
+                case '4':
+                    SearchForVehicle();
+                    break;
+                case '0':
+                    Environment.Exit();
+                    break;
+                default:
+                    Console.WriteLine("Felaktig inmatning");
+                    break;
+            }
 
-
-
-
-
-
+        }
 
         public string ReturnString(string message)
         {
