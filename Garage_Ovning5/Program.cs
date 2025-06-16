@@ -5,7 +5,7 @@
         static void Main(string[] args)
         {
            
-
+            //Skapar upp en manager (typ game.cs)
          
 
 
