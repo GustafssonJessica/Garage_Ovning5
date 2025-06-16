@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Garage_Ovning5
 {
-    internal class UIConsole
+    internal class UI
     {
 
 

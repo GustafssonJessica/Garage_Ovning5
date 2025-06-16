@@ -8,5 +8,12 @@ namespace Garage_Ovning5.Vehicles
 {
     internal class Car : Vehicle
     {
+        public FuelType FuelType { get; set; }
+
+        public Car(string regNumber, string brand, Color color, FuelType fuelType) : base(regNumber, brand, color)
+        {
+            FuelType = fuelType;
+        }
+
     }
 }

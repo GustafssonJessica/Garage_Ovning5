@@ -8,5 +8,12 @@ namespace Garage_Ovning5.Vehicles
 {
     internal class Motorcycle : Vehicle
     {
+        public int CylinderVolume { get; set; }
+
+        public Motorcycle (string regNumber, string brand, Color color, int cylVolume) : base(regNumber, brand, color)
+        {
+            CylinderVolume = cylVolume;
+        }
+
     }
 }

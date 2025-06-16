@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Garage_Ovning5
 {
-    internal enum Color
+    public enum Color
     {
         red, 
         green, 
