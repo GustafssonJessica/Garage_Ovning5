@@ -255,14 +255,21 @@ namespace Garage_Ovning5
 
             int type;
             bool correctVehicleNumber = true;
-             nameOfVehicle = string.Empty;
+            nameOfVehicle = string.Empty;
             do
             {
-                type = ReturnInt("Ange fordonstyp (eller tryck Enter för att hoppa över:):\n1) Bil \n2) Båt \n3) Buss \n4) Flygplan \n5) Motorcyckel");
-                if (type > 5)
+                string message = ("Ange fordonstyp (eller tryck Enter för att hoppa över:):\n1) Bil \n2) Båt \n3) Buss \n4) Flygplan \n5) Motorcyckel");
+                Console.WriteLine(message);
+                string input = Console.ReadLine() ?? string.Empty;
+                bool isANumber = int.TryParse(input, out type);
+                if (string.IsNullOrEmpty(input))
                 {
+                    nameOfVehicle = string.Empty;
+                }
+                else if (!isANumber || type > 5 || type < 1)
+                {
+                    Console.WriteLine("Ej giltig input, försök igen!");
                     correctVehicleNumber = false;
-                    Console.WriteLine("Ogitlig inmatning");
                 }
             } while (!correctVehicleNumber);
 
@@ -286,11 +293,11 @@ namespace Garage_Ovning5
                 default:
                     break;
             }
-          
+
             Console.WriteLine("Ange registreringsnummer (eller tryck Enter för att hoppa över):");
             regNmr = Console.ReadLine() ?? string.Empty;
 
-            Console.WriteLine("Ange färg (eller tryck Enter för att hoppa över): "); //todo nått är fel här, får ogiltig inmatning trots korrekt siffra
+            Console.WriteLine("Ange färg (eller tryck Enter för att hoppa över): "); 
             foreach (Color colour in Enum.GetValues(typeof(Color)))
             {
                 Console.WriteLine($"{(int)colour} - {colour}");
@@ -307,17 +314,18 @@ namespace Garage_Ovning5
                         correctValue = true;
 
                     }
-                    else if (Enum.IsDefined(typeof(Color), input))
-                    {
-                        int colorChoice = int.Parse(Console.ReadLine());
-                        color = (Color)colorChoice;
-                        correctValue = true;
-                        break;
-                    }
                     else
                     {
-                        Console.WriteLine("Ogiltigt färgval. Försök igen.");
-                        color = null;
+                        if (int.TryParse(input, out int colorChoice) && Enum.IsDefined(typeof(Color), colorChoice))
+                        {
+                            color = (Color)colorChoice;
+                            correctValue = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Ogiltigt färgval. Försök igen.");
+                            color = null;
+                        }
                     }
                 }
             } while (!correctValue);
