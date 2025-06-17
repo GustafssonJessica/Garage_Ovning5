@@ -6,23 +6,12 @@ namespace Garage_Ovning5
     {
         static void Main(string[] args)
         {
-            UI ui = new UI(); // Du kan även använda dependency injection om du vill
+            UI ui = new UI();
             GarageHandler garageHandler = new GarageHandler();
 
             Manager manager = new Manager(ui, garageHandler);
 
             manager.Run();
-
-            //Skapar upp en manager (typ game.cs)
-
-  
-
-
-
-
-
-
-
         }
     }
 }

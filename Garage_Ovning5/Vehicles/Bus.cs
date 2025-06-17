@@ -9,11 +9,9 @@ namespace Garage_Ovning5.Vehicles
     internal class Bus : Vehicle
     {
         public bool HasSeatBelts { get; set; }
-
         public Bus(string regNumber, string brand, Color color, bool seatBelts) : base(regNumber, brand, color)
         {
             HasSeatBelts = seatBelts;
         }
-
     }
 }

@@ -23,14 +23,9 @@ namespace Garage_Ovning5.Vehicles
             }
         }
 
-
-
-
         public Airplane(string regNumber, string brand, Color color, int numbOfSeats) : base(regNumber, brand, color)
         {
             NumberOfSeats = numbOfSeats;
         }
-
-
     }
 }

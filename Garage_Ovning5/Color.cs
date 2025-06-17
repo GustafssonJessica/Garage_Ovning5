@@ -8,16 +8,15 @@ namespace Garage_Ovning5
 {
     public enum Color
     {
-        red, 
-        green, 
-        blue, 
-        yellow, 
-        grey, 
-        black, 
-        white, 
-        brown,
-        multicolor
-
-       
+        Red, 
+        Green, 
+        Blue, 
+        Yellow, 
+        Grey, 
+        Black, 
+        White, 
+        Brown,
+        Multicolor, 
+        Other
     }
 }

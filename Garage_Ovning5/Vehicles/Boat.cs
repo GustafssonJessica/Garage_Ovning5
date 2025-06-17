@@ -9,7 +9,6 @@ namespace Garage_Ovning5.Vehicles
     internal class Boat : Vehicle
     {
         private int _length;
-
         public int Length
         {
             get => _length;
@@ -25,11 +24,7 @@ namespace Garage_Ovning5.Vehicles
 
         public Boat(string regNumber, string brand, Color color, int length) : base(regNumber, brand, color)
         {
-           Length = length;
+            Length = length;
         }
-
-
-
-
     }
 }

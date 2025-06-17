@@ -9,13 +9,9 @@ namespace Garage_Ovning5.Vehicles
 {
     public abstract class Vehicle
     {
-
-        public string _registrationNumber { get; set; } //måste vara unikt
-
+        public string _registrationNumber { get; set; } //TOdo måste vara unikt
         public string Brand { get; set; }
-
         public Color Color { get; set; }
-
 
 
         public Vehicle(string regNumber, string brand, Color color)
@@ -24,8 +20,6 @@ namespace Garage_Ovning5.Vehicles
             Brand = brand;
             Color = color;
         }
-
-
 
         public string RegistrationNumber
         {
@@ -45,12 +39,7 @@ namespace Garage_Ovning5.Vehicles
                     {
                         throw new ArgumentException("Ogiltigt registreringsnummer! Sista tre tecken måste vara siffror.");
                     }
-
-                {
-
-                }
             }
         }
-
     }
 }

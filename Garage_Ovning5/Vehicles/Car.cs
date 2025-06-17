@@ -14,6 +14,5 @@ namespace Garage_Ovning5.Vehicles
         {
             FuelType = fuelType;
         }
-
     }
 }
