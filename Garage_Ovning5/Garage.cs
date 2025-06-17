@@ -43,10 +43,29 @@ namespace Garage_Ovning5
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
 
+        //Metod för att parkera ett fordon i garaget 
+        internal void ParkVehicle(T vehicle)
+        {
+            if (IsFull)
+                throw new InvalidOperationException("Garaget är fullt.");//TOdo gör så att den returnerar en bool
+            for (int i = 0; i < _parkedVehicles.Length; i++)
+            {
+                if (_parkedVehicles[i] == null)
+                {
+                    _parkedVehicles[i] = vehicle;
+                    NumberOfParkedVehicles++;
+                    return;
+                }
+            }
+        }
+
+
+        /*
+
         // Metod för att parkera en bil i garaget
         internal void ParkCar(string regNumber, string brand, Color vehicleColor, FuelType fuelType)
         {
-            if (NumberOfParkedVehicles == MaxCapacity)
+            if (IsFull)
             {
                 Console.WriteLine("Tyvärr, garaget är fullt. Bilen kunde inte parkeras"); //TOdo, ändra så att park-metoderna returnerar en bool som isåfall leder till felemddelande istället
                 return;
@@ -121,6 +140,8 @@ namespace Garage_Ovning5
                 }
             }
         }
+
+        */
 
         //Metod för att ta bort ett fordon
         internal bool RemoveVehicle(string regNumber)

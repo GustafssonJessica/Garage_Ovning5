@@ -9,19 +9,19 @@ namespace Garage_Ovning5.Vehicles
 {
     public abstract class Vehicle
     {
-        public string _registrationNumber { get; set; } //TOdo måste vara unikt
+        private string _registrationNumber { get; set; } //TOdo måste vara unikt 
         public string Brand { get; set; }
         public Color Color { get; set; }
 
 
         public Vehicle(string regNumber, string brand, Color color)
         {
-            _registrationNumber = regNumber;
+            RegistrationNumber = regNumber;
             Brand = brand;
             Color = color;
         }
 
-        public string RegistrationNumber
+        public string RegistrationNumber //todo se hur göra så att detta körs i UI när anv skapar fordon
         {
             get => _registrationNumber;
             set

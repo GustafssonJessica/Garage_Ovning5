@@ -51,40 +51,47 @@ namespace Garage_Ovning5
                         string regNumber;
                         string brand;
                         Color vehicleColor;
+                        Vehicle? vehicle = null;
 
                         switch (typeOfVehicle)
                         {
                             case "Car":
                                 FuelType fuelType;
                                 _ui.GetCarInfo(out regNumber, out brand, out vehicleColor, out fuelType);
-                                _garageHandler.ParkCar(regNumber, brand, vehicleColor, fuelType);
+                                vehicle = new Car(regNumber, brand, vehicleColor, fuelType);
+                              //  _garageHandler.ParkCar(regNumber, brand, vehicleColor, fuelType);
                                 break;
 
                             case "Motorcycle":
                                 int cylinderVolume;
                                 _ui.GetMotorCycleInfo(out regNumber, out brand, out vehicleColor, out cylinderVolume);
-                                _garageHandler.ParkMotorCycle(regNumber, brand, vehicleColor, cylinderVolume);
+                                vehicle = new Motorcycle(regNumber, brand, vehicleColor, cylinderVolume);
+                                // _garageHandler.ParkMotorCycle(regNumber, brand, vehicleColor, cylinderVolume);
                                 break;
 
                             case "Boat":
                                 int length;
                                 _ui.GetBoatInfo(out regNumber, out brand, out vehicleColor, out length);
-                                _garageHandler.ParkBoat(regNumber, brand, vehicleColor, length);
+                                vehicle = new Boat(regNumber, brand, vehicleColor, length);
+                                //_garageHandler.ParkBoat(regNumber, brand, vehicleColor, length);
                                 break;
                             case "Bus":
                                 bool hasSeatBelts;
                                 _ui.GetBusInfo(out regNumber, out brand, out vehicleColor, out hasSeatBelts);
-                                _garageHandler.ParkBus(regNumber, brand, vehicleColor, hasSeatBelts);
+                                vehicle = new Bus(regNumber, brand, vehicleColor, hasSeatBelts);
+                                //_garageHandler.ParkBus(regNumber, brand, vehicleColor, hasSeatBelts);
                                 break;
                             case "Airplane":
                                 int numberOfSeats;
                                 _ui.GetAirplaneInfo(out regNumber, out brand, out vehicleColor, out numberOfSeats);
-                                _garageHandler.ParkAirplane(regNumber, brand, vehicleColor, numberOfSeats);
+                                vehicle = new Airplane(regNumber, brand, vehicleColor, numberOfSeats);
+                                //_garageHandler.ParkAirplane(regNumber, brand, vehicleColor, numberOfSeats);
                                 break;
                             default:
                                 break;
                         }
-
+                        if (vehicle != null)
+                            _garageHandler.ParkVehicle(vehicle);
                         break;
                     case '3':
                         // Radera ett fordon
@@ -126,14 +133,16 @@ namespace Garage_Ovning5
 
         internal void RunTestMode()
         {
-            _garageHandler.CreateGarage(5); // Skapar ett garage med 5 platser för testning
-            _garageHandler.ParkCar("ABC123", "Volvo", Color.Red, FuelType.Gasoline);
-            _garageHandler.ParkMotorCycle("DEF456", "Yamaha", Color.Blue, 600);
-            _garageHandler.ParkBoat("GHI789", "Buster", Color.Green, 5);
-            _garageHandler.ParkBus("JKL012", "Scania", Color.Yellow, true);
-            _garageHandler.ParkAirplane("MNO345", "Boeing", Color.White, 150);
-            IEnumerable<Vehicle> allVehicles = _garageHandler.ReturnAllVehicles();
-            _ui.PrintAllVehicles(allVehicles); // Skriver ut alla fordon i garaget
+            //_garageHandler.CreateGarage(5); // Skapar ett garage med 5 platser för testning
+            //_garageHandler.ParkCar("ABC123", "Volvo", Color.Red, FuelType.Gasoline);
+            //_garageHandler.ParkMotorCycle("DEF456", "Yamaha", Color.Blue, 600);
+            //_garageHandler.ParkBoat("GHI789", "Buster", Color.Green, 5);
+            //_garageHandler.ParkBus("JKL012", "Scania", Color.Yellow, true);
+            //_garageHandler.ParkAirplane("MNO345", "Boeing", Color.White, 150);
+            //IEnumerable<Vehicle> allVehicles = _garageHandler.ReturnAllVehicles();
+            //_ui.PrintAllVehicles(allVehicles); // Skriver ut alla fordon i garaget
         }
+
+        
     }
 }

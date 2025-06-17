@@ -12,12 +12,13 @@ namespace Garage_Ovning5
     {
         private Garage<Vehicle>? _garage;
 
+       
         public void CreateGarage(int maxCapacity)
         {
             try
             {
                 _garage = new Garage<Vehicle>(maxCapacity);
-                Console.WriteLine("Ett nytt garage har skapats!");
+                Console.WriteLine("Ett nytt garage har skapats!"); //Todo här har jag text, ej bra
             }
             catch (Exception)
             {
@@ -25,12 +26,25 @@ namespace Garage_Ovning5
             }
         }
 
+        //Metod för att parkera ett fordon i garaget
+        internal void ParkVehicle(Vehicle vehicle)
+        {
+            if (_garage == null)
+            {
+                Console.WriteLine("Garaget är inte skapat. Skapa ett garage först.");
+                return;
+            }
+            _garage.ParkVehicle(vehicle);
+            Console.WriteLine($"{vehicle.GetType().Name} med regnummer {vehicle.RegistrationNumber} är nu parkerad i garaget! \nDet finns {_garage.NumberOfAvailableSpots} platser kvar i garaget.");
+        }
+
+
         // Metod för att ta bort ett fordon från garaget baserat på registreringsnummer
         internal void DeleteVehicle(string regNumber)
         {
             if (_garage == null)
             {
-                Console.WriteLine("Garaget är inte skapat. Skapa ett garage först.");
+                Console.WriteLine("Garaget är inte skapat. Skapa ett garage först."); //todo ta bort text x flera
                 return;
             }
 
@@ -38,7 +52,7 @@ namespace Garage_Ovning5
             var vehicle = _garage.FirstOrDefault(v => v != null && v.RegistrationNumber.Equals(regNumber, StringComparison.OrdinalIgnoreCase));
             if (vehicle == null)
             {
-                Console.WriteLine($"Inget fordon med registreringsnummer {regNumber} kunde hittas i garaget");
+                Console.WriteLine($"Inget fordon med registreringsnummer {regNumber} kunde hittas i garaget"); 
                 return;
             }
 
@@ -53,6 +67,8 @@ namespace Garage_Ovning5
             }
         }
 
+
+        /*
         internal void ParkAirplane(string regNumber, string brand, Color vehicleColor, int numberOfSeats)
         {
 
@@ -120,6 +136,9 @@ namespace Garage_Ovning5
             _garage.ParkMotorCycle(regNumber, brand, vehicleColor, cylinderVolume);
             Console.WriteLine($"Motorcykel med regnummer {regNumber} är nu parkerad i garaget! \nDet finns {_garage.NumberOfAvailableSpots} platser kvar i garaget.");
         }
+
+
+        */
 
         // Metod för att returnera alla fordon i garaget
         public IEnumerable<Vehicle> ReturnAllVehicles()
