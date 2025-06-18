@@ -115,11 +115,13 @@ namespace Garage_Ovning5
                         _ui.PrintAllVehicles(vehicles);
                         break;
                         case '5':
-                    //todo Lista fordonstyper och hur många av varje som står i garaget
-                    //Måste iterera genom fordonen och plussa på 1 för varje fordon som matchar fordonstypen
-                    //Borde gå att skapa en IEnumerable med aktuella fordon och sedan räkna antalet i varje lista
-                    //Sedan returnera en IEnumerable med fordonstyper och antal
-
+                        //todo Lista fordonstyper och hur många av varje som står i garaget
+                        var typesAndNumbers = _garageHandler.GetVehicleTypes();
+                        _ui.ShowVehicleTypes(typesAndNumbers);
+                        //Måste iterera genom fordonen och plussa på 1 för varje fordon som matchar fordonstypen
+                        //Borde gå att skapa en IEnumerable med aktuella fordon och sedan räkna antalet i varje lista
+                        //Sedan returnera en IEnumerable med fordonstyper och antal
+                        break;
                     case '6':
                         // Sök efter fordon i garaget
                         _ui.SelectSearchFilters(out string type, out regNumber, out Color? color, out brand);

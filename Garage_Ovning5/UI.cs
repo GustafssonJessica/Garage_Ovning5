@@ -19,7 +19,7 @@ namespace Garage_Ovning5
                              "\n3) Ta bort fordon från garaget"+
                              "\n4) Lista samtliga fordon i garagen " +
                              "\n5) Lista hur många av de olika fordonstyperna som står i garaget" +
-                             "\n6) Sök efter fordon i garage" +
+                             "\n6) Sök efter fordon i garage" + //TOdo lägga till att man kan populera garaget från början
                              "\n0) Stäng applikationen" +
                              "\n\nAnge ett val (0-5):";
 
@@ -391,6 +391,22 @@ namespace Garage_Ovning5
         internal void PrintGarageFullMessage()
         {
             Console.WriteLine($"Fordonet kunde inte parkeras då det redan finns ett fordon med detta registreringsnummer i garaget."); //todo skriv med regnummer om tid finns
+        }
+
+        internal void ShowVehicleTypes(Dictionary<string, int> typesAndNumbers)
+        {
+
+            if (typesAndNumbers.Count == 0)
+            {
+                Console.WriteLine("Det finns inga fordon i garaget just nu!");
+                return;
+            }
+
+            Console.WriteLine("Fordon i garaget: ");
+            foreach (var key in typesAndNumbers)
+            {
+                Console.WriteLine($"Fordonstyp: {key.Key} - Antal: {key.Value}");
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Garage_Ovning5
     {
         private Garage<Vehicle>? _garage;
 
-       
+
         public void CreateGarage(int maxCapacity)
         {
             try
@@ -60,7 +60,7 @@ namespace Garage_Ovning5
             var vehicle = _garage.FirstOrDefault(v => v != null && v.RegistrationNumber.Equals(regNumber, StringComparison.OrdinalIgnoreCase));
             if (vehicle == null)
             {
-                Console.WriteLine($"Inget fordon med registreringsnummer {regNumber} kunde hittas i garaget"); 
+                Console.WriteLine($"Inget fordon med registreringsnummer {regNumber} kunde hittas i garaget");
                 return;
             }
 
@@ -187,6 +187,43 @@ namespace Garage_Ovning5
                 return false;
             }
             return true;
+        }
+
+        internal Dictionary<string, int> GetVehicleTypes()
+        {
+            //Måste iterera genom fordonen och plussa på 1 för varje fordon som matchar fordonstypen
+            //Borde gå att skapa en IEnumerable med aktuella fordon och sedan räkna antalet i varje lista
+            // Måste sedan returnera antalet av varje typ. 
+
+            if (_garage == null)
+            {
+                return new Dictionary<string, int>(); //eller annan lösning?
+            }
+
+            return _garage.Where(v => v != null).
+                GroupBy(v => v.GetType().Name).
+                ToDictionary(g => g.Key, g => g.Count()); //Nyckeln blir det som det grupperas efter på raden över (klassnamn)
+
+
+
+
+            // var cars = _garage.Where(v => v.GetType() == typeof(Car));
+            // int numberOfCars = cars.Count();
+
+            // var boats = _garage.Where(v => v.GetType() == typeof(Boat));
+            // int numberOfBoats = boats.Count();
+
+            // var busses = _garage.Where(v => v.GetType() == typeof(Bus));
+            // int numberOfBusses = busses.Count();
+
+            // var airplanes = _garage.Where(v => v.GetType() == typeof(Airplane));
+            // int numberOfAirplanes = airplanes.Count();
+
+            // var motorcycles = _garage.Where(v => v.GetType() == typeof(Motorcycle));
+            // int numberOfMotorcycles = motorcycles.Count();
+
+            //return $"Bilar: {numberOfCars} Båtar: {numberOfBoats} Bussar: {numberOfBusses} Flygplan: {numberOfAirplanes} Motorcyklar: {numberOfMotorcycles}";
+
         }
     }
 
