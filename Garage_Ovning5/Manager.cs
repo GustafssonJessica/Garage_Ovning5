@@ -28,7 +28,7 @@ namespace Garage_Ovning5
 
                 //Kollar så att ett garage existerar innan vissa val kan göras
                 bool garageExists = true;
-                if (choice == '2' || choice == '3' || choice == '4' || choice == 5)
+                if (choice == '2' || choice == '3' || choice == '4' || choice == '5' || choice == '6')
                 {
                     garageExists = GarageExists(); 
                 }
@@ -43,7 +43,8 @@ namespace Garage_Ovning5
                     case '1':
                         //Skapar ett nytt garage
                         int garageSize = _ui.GetNewGarageInfo();
-                        _garageHandler.CreateGarage(garageSize);
+                       bool garageCreated = _garageHandler.CreateGarage(garageSize);
+                        _ui.PrintGarageCreatedMessage(garageSize, garageCreated); // Meddelande om att garaget har skapats
                         break;
                     case '2':
                         //Parkera ett fordon
@@ -107,7 +108,8 @@ namespace Garage_Ovning5
                     case '3':
                         // Radera ett fordon
                         regNumber = _ui.GetDeleteInfo();
-                        _garageHandler.DeleteVehicle(regNumber);
+                        bool vehicleRemoved = _garageHandler.DeleteVehicle(regNumber);
+                        _ui.PrintVehicleRemovedMessage(vehicleRemoved, regNumber);
                         break;
                     case '4':
                         // Visa alla fordon i garaget
@@ -152,16 +154,16 @@ namespace Garage_Ovning5
 
         internal void RunTestMode()
         {
-            //_garageHandler.CreateGarage(5); // Skapar ett garage med 5 platser för testning
-            //_garageHandler.ParkCar("ABC123", "Volvo", Color.Red, FuelType.Gasoline);
-            //_garageHandler.ParkMotorCycle("DEF456", "Yamaha", Color.Blue, 600);
-            //_garageHandler.ParkBoat("GHI789", "Buster", Color.Green, 5);
-            //_garageHandler.ParkBus("JKL012", "Scania", Color.Yellow, true);
-            //_garageHandler.ParkAirplane("MNO345", "Boeing", Color.White, 150);
-            //IEnumerable<Vehicle> allVehicles = _garageHandler.ReturnAllVehicles();
-            //_ui.PrintAllVehicles(allVehicles); // Skriver ut alla fordon i garaget
+            _garageHandler.CreateGarage(5); // Skapar ett garage med 5 platser för testning
+            _garageHandler.ParkVehicle(new Car("ABC123", "Volvo", Color.Red, FuelType.Gasoline));
+            _garageHandler.ParkVehicle(new Motorcycle("DEF456", "Yamaha", Color.Blue, 600));
+            _garageHandler.ParkVehicle(new Boat("GHI789", "Buster", Color.Green, 5));
+            _garageHandler.ParkVehicle(new Bus("JKL012", "Scania", Color.Yellow, true));
+            _garageHandler.ParkVehicle(new Airplane("MNO345", "Boeing", Color.White, 150));
+            IEnumerable<Vehicle> allVehicles = _garageHandler.ReturnAllVehicles();
+            _ui.PrintAllVehicles(allVehicles); // Skriver ut alla fordon i garaget
         }
 
-        
+
     }
 }

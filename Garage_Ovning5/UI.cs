@@ -133,7 +133,7 @@ namespace Garage_Ovning5
         internal void GetVehicleInfo(out string regNumber, out string brand, out Color vehicleColor)
         {
             // Validerar att registrenringsnumret är i rätt format (AAA111)
-            bool validRegNumber = true ;
+            bool validRegNumber = true;
             do
             {
                 regNumber = ReturnString("Ange Registreringsnummer, format: XXX111 (OBS måste vara unikt för att fordonet ska skapas) ");
@@ -326,7 +326,7 @@ namespace Garage_Ovning5
             Console.WriteLine("Ange registreringsnummer (eller tryck Enter för att hoppa över):");
             regNmr = Console.ReadLine() ?? string.Empty;
 
-            Console.WriteLine("Ange färg (eller tryck Enter för att hoppa över): "); 
+            Console.WriteLine("Ange färg (eller tryck Enter för att hoppa över): ");
             foreach (Color colour in Enum.GetValues(typeof(Color)))
             {
                 Console.WriteLine($"{(int)colour} - {colour}");
@@ -366,11 +366,12 @@ namespace Garage_Ovning5
 
         internal void PrintFilteredVehicles(IEnumerable<Vehicle> filteredVehicles)
         {
-            if (!filteredVehicles.Any())
+            if( !filteredVehicles.Any())
             {
-                Console.WriteLine("Inga fordon finns i garaget.");
+                Console.WriteLine("Inga fordon uppfyller dina sökkriterier.");
                 return;
             }
+
             Console.WriteLine("Fordon som uppfyller dina sökkriterier:");
             foreach (var vehicle in filteredVehicles)
             {
@@ -406,6 +407,28 @@ namespace Garage_Ovning5
             foreach (var key in typesAndNumbers)
             {
                 Console.WriteLine($"Fordonstyp: {key.Key} - Antal: {key.Value}");
+            }
+        }
+
+        internal void PrintGarageCreatedMessage(int garageSize, bool garageCreated)
+        {
+            if (garageCreated)
+            {
+                Console.WriteLine($"Ett nytt garage med {garageSize} parkeringsplatser har skapats!");
+                return;
+            }
+            Console.WriteLine("Garaget kunde tyvärr inte skapas. Var god försök igen");
+        }
+
+        internal void PrintVehicleRemovedMessage(bool vehicleRemoved, string regNumber)
+        {
+            if (vehicleRemoved)
+            {
+                Console.WriteLine($"Fordonet med registreringsnummer {regNumber} har tagits bort från garaget.");
+            }
+            else
+            {
+                Console.WriteLine($"Kunde inte ta bort fordonet med registreringsnummer {regNumber}. Det finns inget fordon med det registreringsnumret i garaget.");
             }
         }
     }
