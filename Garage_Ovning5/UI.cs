@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Garage_Ovning5
 {
-    internal class UI
+    public class UI : IUI
     {
 
         //Huvudmeny
@@ -27,7 +27,7 @@ namespace Garage_Ovning5
             return choice;
         }
 
-        internal int GetNewGarageInfo()
+        public int GetNewGarageInfo()
         {
             //todo Kolla så det inte redan finns ett garage
             string message = "Du har valt att skapa ett nytt garage. Hur många parkeringsplatser ska garaget innehålla?";
@@ -130,7 +130,7 @@ namespace Garage_Ovning5
         }
 
         // Metod för att hämta information om ett fordon som ska parkeras
-        internal void GetVehicleInfo(out string regNumber, out string brand, out Color vehicleColor)
+        public void GetVehicleInfo(out string regNumber, out string brand, out Color vehicleColor)
         {
             // Validerar att registrenringsnumret är i rätt format (AAA111)
             bool validRegNumber = true;
@@ -186,7 +186,7 @@ namespace Garage_Ovning5
         }
 
 
-        internal void GetCarInfo(out string regNumber, out string brand, out Color vehicleColor, out FuelType fuelType)
+        public void GetCarInfo(out string regNumber, out string brand, out Color vehicleColor, out FuelType fuelType)
         {
             GetVehicleInfo(out regNumber, out brand, out vehicleColor);
             Console.WriteLine("Ange drivmedel genom att välja rätt nummer: ");
@@ -209,20 +209,20 @@ namespace Garage_Ovning5
                 }
             }
         }
-        internal void GetBoatInfo(out string regNumber, out string brand, out Color vehicleColor, out int length)
+        public void GetBoatInfo(out string regNumber, out string brand, out Color vehicleColor, out int length)
         {
             GetVehicleInfo(out regNumber, out brand, out vehicleColor);
 
             length = ReturnInt("Ange båtens längd: ");
         }
 
-        internal void GetMotorCycleInfo(out string regNumber, out string brand, out Color vehicleColor, out int cylinderVolume)
+        public void GetMotorCycleInfo(out string regNumber, out string brand, out Color vehicleColor, out int cylinderVolume)
         {
             GetVehicleInfo(out regNumber, out brand, out vehicleColor);
             cylinderVolume = ReturnInt("Ange motorcykelns cylindervolym: ");
         }
 
-        internal void GetBusInfo(out string regNumber, out string brand, out Color vehicleColor, out bool hasSeatBelts)
+        public void GetBusInfo(out string regNumber, out string brand, out Color vehicleColor, out bool hasSeatBelts)
         {
             GetVehicleInfo(out regNumber, out brand, out vehicleColor);
             int seatBelts;
@@ -246,14 +246,14 @@ namespace Garage_Ovning5
             }
         }
 
-        internal void GetAirplaneInfo(out string regNumber, out string brand, out Color vehicleColor, out int numberOfSeats)
+        public void GetAirplaneInfo(out string regNumber, out string brand, out Color vehicleColor, out int numberOfSeats)
         {
             GetVehicleInfo(out regNumber, out brand, out vehicleColor);
             numberOfSeats = ReturnInt("Hur många säten har flygplanet? ");
         }
 
         // Metod för att hämta registreringsnummer på ett fordon som ska tas bort från garaget
-        internal string GetDeleteInfo()
+        public string GetDeleteInfo()
         {
             string message = ("Du vill ta bort ett fordon från garaget. Var god mata in fordonets registreringsnummer: ");
             string regNumber = ReturnString(message);
@@ -261,7 +261,7 @@ namespace Garage_Ovning5
         }
 
         // Metod för att skriva ut alla fordon i garaget
-        internal void PrintAllVehicles(IEnumerable<Vehicle> vehicles)
+        public void PrintAllVehicles(IEnumerable<Vehicle> vehicles)
         {
             if (!vehicles.Any())
             {
@@ -278,7 +278,7 @@ namespace Garage_Ovning5
         }
 
         // Metod för att hämta sökkriterier för att filtrera fordon i garaget
-        internal void SelectSearchFilters(out string nameOfVehicle, out string regNmr, out Color? color, out string brand)
+        public void SelectSearchFilters(out string nameOfVehicle, out string regNmr, out Color? color, out string brand)
         {
             //svårt använda returnString när det får vara null/empty
 
@@ -364,9 +364,9 @@ namespace Garage_Ovning5
             brand = Console.ReadLine() ?? string.Empty;
         }
 
-        internal void PrintFilteredVehicles(IEnumerable<Vehicle> filteredVehicles)
+        public void PrintFilteredVehicles(IEnumerable<Vehicle> filteredVehicles)
         {
-            if( !filteredVehicles.Any())
+            if (!filteredVehicles.Any())
             {
                 Console.WriteLine("Inga fordon uppfyller dina sökkriterier.");
                 return;
@@ -379,22 +379,22 @@ namespace Garage_Ovning5
             }
         }
 
-        internal void PrintNoGarageMessage()
+        public void PrintNoGarageMessage()
         {
             Console.WriteLine("Du måste skapa ett garage innan du kan utföra denna åtgärd.");
         }
 
-        internal void PrintVehicleParkedMessage()
+        public void PrintVehicleParkedMessage()
         {
             Console.WriteLine($"Fordonet är nu parkerad i garaget!"); //TOdo om tid: skicka med fordonets regnumber plus numberOFAvaiablespots att skriva ut \nDet finns {_garage.NumberOfAvailableSpots} platser kvar i garaget.");
         }
 
-        internal void PrintGarageFullMessage()
+        public void PrintGarageFullMessage()
         {
             Console.WriteLine($"Fordonet kunde inte parkeras då det redan finns ett fordon med detta registreringsnummer i garaget."); //todo skriv med regnummer om tid finns
         }
 
-        internal void ShowVehicleTypes(Dictionary<string, int> typesAndNumbers)
+        public void ShowVehicleTypes(Dictionary<string, int> typesAndNumbers)
         {
 
             if (typesAndNumbers.Count == 0)
@@ -410,7 +410,7 @@ namespace Garage_Ovning5
             }
         }
 
-        internal void PrintGarageCreatedMessage(int garageSize, bool garageCreated)
+        public void PrintGarageCreatedMessage(int garageSize, bool garageCreated)
         {
             if (garageCreated)
             {
@@ -420,7 +420,7 @@ namespace Garage_Ovning5
             Console.WriteLine("Garaget kunde tyvärr inte skapas. Var god försök igen");
         }
 
-        internal void PrintVehicleRemovedMessage(bool vehicleRemoved, string regNumber)
+        public void PrintVehicleRemovedMessage(bool vehicleRemoved, string regNumber)
         {
             if (vehicleRemoved)
             {

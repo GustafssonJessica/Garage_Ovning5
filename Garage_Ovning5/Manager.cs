@@ -10,10 +10,10 @@ namespace Garage_Ovning5
 {
     internal class Manager
     {
-        private UI _ui; //todo gör om dessa till interface
-        private GarageHandler _garageHandler;
+        private IUI _ui; //todo gör om dessa till interface
+        private IGarageHandler _garageHandler;
 
-        public Manager(UI ui, GarageHandler garageHandler)
+        public Manager(IUI ui, IGarageHandler garageHandler)
         {
             _ui = ui;
             _garageHandler = garageHandler;
@@ -44,7 +44,7 @@ namespace Garage_Ovning5
                         //Skapar ett nytt garage
                         int garageSize = _ui.GetNewGarageInfo();
                        bool garageCreated = _garageHandler.CreateGarage(garageSize);
-                        _ui.PrintGarageCreatedMessage(garageSize, garageCreated); // Meddelande om att garaget har skapats
+                        _ui.PrintGarageCreatedMessage(garageSize, garageCreated); 
                         break;
                     case '2':
                         //Parkera ett fordon
@@ -67,26 +67,22 @@ namespace Garage_Ovning5
                                 int cylinderVolume;
                                 _ui.GetMotorCycleInfo(out regNumber, out brand, out vehicleColor, out cylinderVolume);
                                 vehicle = new Motorcycle(regNumber, brand, vehicleColor, cylinderVolume);
-                                // _garageHandler.ParkMotorCycle(regNumber, brand, vehicleColor, cylinderVolume);
                                 break;
 
                             case "Boat":
                                 int length;
                                 _ui.GetBoatInfo(out regNumber, out brand, out vehicleColor, out length);
                                 vehicle = new Boat(regNumber, brand, vehicleColor, length);
-                                //_garageHandler.ParkBoat(regNumber, brand, vehicleColor, length);
                                 break;
                             case "Bus":
                                 bool hasSeatBelts;
                                 _ui.GetBusInfo(out regNumber, out brand, out vehicleColor, out hasSeatBelts);
                                 vehicle = new Bus(regNumber, brand, vehicleColor, hasSeatBelts);
-                                //_garageHandler.ParkBus(regNumber, brand, vehicleColor, hasSeatBelts);
                                 break;
                             case "Airplane":
                                 int numberOfSeats;
                                 _ui.GetAirplaneInfo(out regNumber, out brand, out vehicleColor, out numberOfSeats);
                                 vehicle = new Airplane(regNumber, brand, vehicleColor, numberOfSeats);
-                                //_garageHandler.ParkAirplane(regNumber, brand, vehicleColor, numberOfSeats);
                                 break;
                             default:
                                 break;
@@ -163,7 +159,5 @@ namespace Garage_Ovning5
             IEnumerable<Vehicle> allVehicles = _garageHandler.ReturnAllVehicles();
             _ui.PrintAllVehicles(allVehicles); // Skriver ut alla fordon i garaget
         }
-
-
     }
 }

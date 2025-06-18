@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Garage_Ovning5
 {
-    internal class GarageHandler
+    public class GarageHandler : IGarageHandler
     {
         private Garage<Vehicle>? _garage;
 
@@ -27,7 +27,7 @@ namespace Garage_Ovning5
         }
 
         //Metod för att parkera ett fordon i garaget
-        internal bool ParkVehicle(Vehicle vehicle)
+        public bool ParkVehicle(Vehicle vehicle)
         {
             //Funktion för att jämföra om vehiclen som skickas med har ett unikt registreringsnummer
             if (_garage.Any(v => v != null && v.RegistrationNumber.Equals(vehicle.RegistrationNumber, StringComparison.OrdinalIgnoreCase)))
@@ -40,7 +40,7 @@ namespace Garage_Ovning5
 
 
         // Metod för att ta bort ett fordon från garaget baserat på registreringsnummer
-        internal bool DeleteVehicle(string regNumber)
+        public bool DeleteVehicle(string regNumber)
         {
             // Hitta fordonet med rätt registreringsnummer med LINQ
             var vehicle = _garage.FirstOrDefault(v => v != null && v.RegistrationNumber.Equals(regNumber, StringComparison.OrdinalIgnoreCase));
@@ -63,7 +63,7 @@ namespace Garage_Ovning5
             return _garage.GetAllVehicles();
         }
 
-        internal IEnumerable<Vehicle> SearchVehicles(string type, string regNumber, Color? color, string brand)
+        public IEnumerable<Vehicle> SearchVehicles(string type, string regNumber, Color? color, string brand)
         {
             if (string.IsNullOrEmpty(type) && string.IsNullOrEmpty(regNumber) && color == null && string.IsNullOrEmpty(brand))
             {
@@ -74,7 +74,7 @@ namespace Garage_Ovning5
 
 
         //Metod för att kontrollera om garaget finns och har skapats
-        internal bool CheckIfGarageExists()
+        public bool CheckIfGarageExists()
         {
             if (_garage == null)
             {
@@ -84,7 +84,7 @@ namespace Garage_Ovning5
         }
 
         // Metod för att hämta fordonstyper och antal i garaget
-        internal Dictionary<string, int> GetVehicleTypes()
+        public Dictionary<string, int> GetVehicleTypes()
         {
             if (_garage == null)
             {
