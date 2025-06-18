@@ -5,11 +5,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
+
 namespace Garage_Ovning5.Vehicles
 {
     public abstract class Vehicle
     {
-        private string _registrationNumber { get; set; } //TOdo måste vara unikt 
+        private string _registrationNumber; //TOdo måste vara unikt 
         public string Brand { get; set; }
         public Color Color { get; set; }
 
@@ -39,6 +40,7 @@ namespace Garage_Ovning5.Vehicles
                     {
                         throw new ArgumentException("Ogiltigt registreringsnummer! Sista tre tecken måste vara siffror.");
                     }
+                _registrationNumber = value;
             }
         }
     }

@@ -91,7 +91,18 @@ namespace Garage_Ovning5
                                 break;
                         }
                         if (vehicle != null)
-                            _garageHandler.ParkVehicle(vehicle);
+                        {
+                            bool succees = _garageHandler.ParkVehicle(vehicle);
+                            if (succees)
+                            {
+                                _ui.PrintVehicleParkedMessage();
+                            }
+                            else
+                            {
+                                _ui.PrintGarageFullMessage();
+                            }
+                        }
+
                         break;
                     case '3':
                         // Radera ett fordon
@@ -103,7 +114,13 @@ namespace Garage_Ovning5
                         IEnumerable<Vehicle> vehicles = _garageHandler.ReturnAllVehicles();
                         _ui.PrintAllVehicles(vehicles);
                         break;
-                    case '5':
+                        case '5':
+                    //todo Lista fordonstyper och hur många av varje som står i garaget
+                    //Måste iterera genom fordonen och plussa på 1 för varje fordon som matchar fordonstypen
+                    //Borde gå att skapa en IEnumerable med aktuella fordon och sedan räkna antalet i varje lista
+                    //Sedan returnera en IEnumerable med fordonstyper och antal
+
+                    case '6':
                         // Sök efter fordon i garaget
                         _ui.SelectSearchFilters(out string type, out regNumber, out Color? color, out brand);
                         IEnumerable<Vehicle> filteredVehicles = _garageHandler.SearchVehicles(type, regNumber, color, brand);

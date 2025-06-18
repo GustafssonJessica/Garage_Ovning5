@@ -27,15 +27,23 @@ namespace Garage_Ovning5
         }
 
         //Metod för att parkera ett fordon i garaget
-        internal void ParkVehicle(Vehicle vehicle)
+        internal bool ParkVehicle(Vehicle vehicle)
         {
-            if (_garage == null)
+            //if (_garage == null)
+            //{
+            //    Console.WriteLine("Garaget är inte skapat. Skapa ett garage först.");
+            //    return;
+            //}
+
+            //Funktion för att jämföra om vehiclen som skickas med har ett unikt registreringsnummer
+            if (_garage.Any(v => v != null && v.RegistrationNumber.Equals(vehicle.RegistrationNumber, StringComparison.OrdinalIgnoreCase)))
             {
-                Console.WriteLine("Garaget är inte skapat. Skapa ett garage först.");
-                return;
+                Console.WriteLine($"Fordon med registreringsnummer {vehicle.RegistrationNumber} finns redan i garaget.");
+                return false;
             }
+
             _garage.ParkVehicle(vehicle);
-            Console.WriteLine($"{vehicle.GetType().Name} med regnummer {vehicle.RegistrationNumber} är nu parkerad i garaget! \nDet finns {_garage.NumberOfAvailableSpots} platser kvar i garaget.");
+            return true;
         }
 
 

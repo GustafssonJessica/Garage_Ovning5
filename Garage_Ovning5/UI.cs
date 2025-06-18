@@ -17,8 +17,9 @@ namespace Garage_Ovning5
                              "\n1) Skapa ett nytt garage" +
                              "\n2) Parkera fordon i garaget" +
                              "\n3) Ta bort fordon från garaget"+
-                             "\n4) Lista samtliga fordon i garage" +
-                             "\n5) Sök efter fordon i garage" +
+                             "\n4) Lista samtliga fordon i garagen " +
+                             "\n5) Lista hur många av de olika fordonstyperna som står i garaget" +
+                             "\n6) Sök efter fordon i garage" +
                              "\n0) Stäng applikationen" +
                              "\n\nAnge ett val (0-5):";
 
@@ -131,7 +132,35 @@ namespace Garage_Ovning5
         // Metod för att hämta information om ett fordon som ska parkeras
         internal void GetVehicleInfo(out string regNumber, out string brand, out Color vehicleColor)
         {
-            regNumber = ReturnString("Registreringsnummer: ");
+            // Validerar att registrenringsnumret är i rätt format (AAA111)
+            bool validRegNumber = true ;
+            do
+            {
+                regNumber = ReturnString("Ange Registreringsnummer, format: XXX111 (OBS måste vara unikt för att fordonet ska skapas) ");
+                if (regNumber.Length != 6)
+                {
+                    Console.WriteLine("Felaktigt antal tecken. Det måste vara 6 tecken");
+                    validRegNumber = false;
+                }
+                else if (!char.IsLetter(regNumber[0]) || !char.IsLetter(regNumber[1]) || !char.IsLetter(regNumber[2]) || !char.IsDigit(regNumber[3]) || !char.IsDigit(regNumber[4]) || !char.IsDigit(regNumber[5]))
+                {
+                    Console.WriteLine("Ogiltigt registreringsnummer. Första tre tecken måste vara bokstäver och sista tre tecken måste vara siffror.");
+                    validRegNumber = false;
+                }
+                else
+                {
+                    validRegNumber = true;
+                }
+            } while (!validRegNumber);
+            // Måste validera om regNumret är unikt eller ej. För att göra det måste regNumret
+            //skickas till Mangager och vidare till garageHandler där det jämförst med existerande fordon (LINQ?)
+
+            //JUst nu returneras regNumber som 
+
+
+
+
+
             brand = ReturnString("Märke: ");
 
             //todo denna finns både här och i filtrera fordon-metoden, kanske bryta ut?
@@ -243,7 +272,7 @@ namespace Garage_Ovning5
             Console.WriteLine("Parkerade fordon i garaget: ");
             foreach (var vehicle in vehicles)
             {
-                Console.WriteLine($"Fordonstyp: {vehicle.GetType().Name} Registreringsnummer: {vehicle.RegistrationNumber}, Färg: {vehicle.Color}, Märke: {vehicle.Brand}");
+                Console.WriteLine($"Fordonstyp: {vehicle.GetType().Name} Registreringsnummer: {vehicle.RegistrationNumber}, Färg: {vehicle.Color}, Märke på fordonet: {vehicle.Brand}");
 
             }
         }
@@ -352,6 +381,16 @@ namespace Garage_Ovning5
         internal void PrintNoGarageMessage()
         {
             Console.WriteLine("Du måste skapa ett garage innan du kan utföra denna åtgärd.");
+        }
+
+        internal void PrintVehicleParkedMessage()
+        {
+            Console.WriteLine($"Fordonet är nu parkerad i garaget!"); //TOdo om tid: skicka med fordonets regnumber plus numberOFAvaiablespots att skriva ut \nDet finns {_garage.NumberOfAvailableSpots} platser kvar i garaget.");
+        }
+
+        internal void PrintGarageFullMessage()
+        {
+            Console.WriteLine($"Fordonet kunde inte parkeras då det redan finns ett fordon med detta registreringsnummer i garaget."); //todo skriv med regnummer om tid finns
         }
     }
 }
