@@ -46,8 +46,8 @@ namespace Garage_Ovning5
         //Metod för att parkera ett fordon i garaget 
         public void ParkVehicle(T vehicle)
         {
-            if (IsFull)
-                throw new InvalidOperationException("Garaget är fullt.");//TOdo gör så att den returnerar en bool
+            //if (IsFull)
+            //    throw new InvalidOperationException("Garaget är fullt.");//TOdo gör så att den returnerar en bool istället
             for (int i = 0; i < _parkedVehicles.Length; i++)
             {
                 if (_parkedVehicles[i] == null)

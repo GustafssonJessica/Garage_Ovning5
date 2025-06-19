@@ -17,12 +17,11 @@ namespace Garage_Ovning5.Tests
             Vehicle vehicle = new Car("ABC123", "Ford", Color.Red, FuelType.Diesel);
             //Ask 
             garage.ParkVehicle(vehicle);
-            //Assert - Se om fordonet adderats?
+            //Assert 
             Assert.Contains(vehicle, garage);
         }
 
-        //Gör en metod där att använda den där metoden med flera parkerade fordon och se om den returnerar rätt antal fordon
-
+        // Test för att se att fordon av olika slag kan läggas till i garaget
         [Fact]
         public void Park5Vehicles_5vehiclesInGarage_Return5Vehicles()
         {
@@ -39,6 +38,38 @@ namespace Garage_Ovning5.Tests
         // Om garaget inte är skapat
 
 
+        // Test för att     prova enumeratorn
+       
+
+
+
+
+        // Test för att se att man kan söka på fordon i garaget
+        [Fact]
+        public void GetFilteredVehicles_SearchColorGreen_ReturnBoat()
+        {
+            Garage<Vehicle> garage = new Garage<Vehicle>(5);
+            garage.Park5Vehicles();
+
+            IEnumerable<Vehicle> vehicles = garage.GetFilteredVehicles("", "", Color.Green, "");
+
+            Assert.Contains(vehicles, v => v.Color == Color.Green && v is Boat);
+        }
+
+        // Test för att se att inga fordon returneras om ej sökning matchar kriterier
+        [Fact]
+        public void GetFilteredVehicles_SearchBrandToyota_NoVehiclesReturned()
+        {
+            Garage<Vehicle> garage = new Garage<Vehicle>(5);
+            garage.Park5Vehicles();
+
+            IEnumerable<Vehicle> vehicles = garage.GetFilteredVehicles("", "", null, "Toyota");
+
+            Assert.DoesNotContain(vehicles, v => v.Brand == "Toyota");
+        }
+        
+
+        // Test för att se att man kan radera ett fordon från garaget
         [Fact]
         public void RemoveVehicle_ValidRegNumber_VehicleRemoved()
         {
@@ -54,6 +85,7 @@ namespace Garage_Ovning5.Tests
         }
 
 
+        // Test för att se att fordon ej raderas om registreringsnumret inte finns i garaget
         [Fact]
         public void RemoveVehicle_InvalidRegNumber_VehicleNotRemoved()
         {
@@ -66,9 +98,6 @@ namespace Garage_Ovning5.Tests
             // Assert
             Assert.False(result);
             Assert.Contains(vehicle, garage);
-
         }
-
-
     }
 }
