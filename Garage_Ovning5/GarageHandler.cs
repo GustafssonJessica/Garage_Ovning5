@@ -12,7 +12,7 @@ namespace Garage_Ovning5
     {
         private Garage<Vehicle>? _garage;
 
-
+        // Metod för att skapa ett garage med en maxkapacitet
         public bool CreateGarage(int maxCapacity)
         {
             try
@@ -31,6 +31,10 @@ namespace Garage_Ovning5
         {
             //Funktion för att jämföra om vehiclen som skickas med har ett unikt registreringsnummer
             if (_garage.Any(v => v != null && v.RegistrationNumber.Equals(vehicle.RegistrationNumber, StringComparison.OrdinalIgnoreCase)))
+            {
+                return false;
+            }
+            if (_garage.IsFull)
             {
                 return false;
             }
@@ -94,6 +98,15 @@ namespace Garage_Ovning5
             return _garage.Where(v => v != null).
                 GroupBy(v => v.GetType().Name).
                 ToDictionary(g => g.Key, g => g.Count()); //Nyckeln blir det som det grupperas efter på raden över (klassnamn)
+        }
+
+        public bool CheckIfGarageIsFull()
+        {
+            if (_garage.IsFull)
+            {
+                return true;
+            }
+            return false;
         }
     }
 

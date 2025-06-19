@@ -19,7 +19,7 @@ namespace Garage_Ovning5
 
         public int NumberOfAvailableSpots => MaxCapacity - NumberOfParkedVehicles;
 
-        public bool IsFull { get; set; }
+        public bool IsFull => NumberOfParkedVehicles == MaxCapacity ? true : false;
 
 
         //Konstruktor som skapar ett garage med en maxkapacitet
@@ -58,90 +58,6 @@ namespace Garage_Ovning5
                 }
             }
         }
-
-
-        /*
-
-        // Metod för att parkera en bil i garaget
-        internal void ParkCar(string regNumber, string brand, Color vehicleColor, FuelType fuelType)
-        {
-            if (IsFull)
-            {
-                Console.WriteLine("Tyvärr, garaget är fullt. Bilen kunde inte parkeras"); //TOdo, ändra så att park-metoderna returnerar en bool som isåfall leder till felemddelande istället
-                return;
-            }
-
-            Vehicle newCar = new Car(regNumber, brand, vehicleColor, fuelType);
-
-            for (int i = 0; i < _parkedVehicles.Length; i++)
-            {
-                if (_parkedVehicles[i] == null)
-                {
-                    _parkedVehicles[i] = (T)newCar;
-                    NumberOfParkedVehicles++;
-                    break;
-                }
-            }
-        }
-
-        internal void ParkMotorCycle(string regNumber, string brand, Color vehicleColor, int cylinderVolume)
-
-        {
-            Vehicle newMotorcycle = new Motorcycle(regNumber, brand, vehicleColor, cylinderVolume);
-            for (int i = 0; i < _parkedVehicles.Length; i++)
-            {
-                if (_parkedVehicles[i] == null)
-                {
-                    _parkedVehicles[i] = (T)newMotorcycle;
-                    NumberOfParkedVehicles++;
-                    break;
-                }
-            }
-        }
-
-        internal void ParkBoat(string regNumber, string brand, Color vehicleColor, int length)
-        {
-            Vehicle newBoat = new Boat(regNumber, brand, vehicleColor, length);
-            for (int i = 0; i < _parkedVehicles.Length; i++)
-            {
-                if (_parkedVehicles[i] == null)
-                {
-                    _parkedVehicles[i] = (T)newBoat;
-                    NumberOfParkedVehicles++;
-                    break;
-                }
-            }
-        }
-
-        internal void ParkBus(string regNumber, string brand, Color vehicleColor, bool hasSeatBelts)
-        {
-            Vehicle newBus = new Bus(regNumber, brand, vehicleColor, hasSeatBelts);
-            for (int i = 0; i < _parkedVehicles.Length; i++)
-            {
-                if (_parkedVehicles[i] == null)
-                {
-                    _parkedVehicles[i] = (T)newBus;
-                    NumberOfParkedVehicles++;
-                    break;
-                }
-            }
-        }
-
-        internal void ParkAirplane(string regNumber, string brand, Color vehicleColor, int numberOfSeats)
-        {
-            Vehicle newAirplane = new Airplane(regNumber, brand, vehicleColor, numberOfSeats);
-            for (int i = 0; i < _parkedVehicles.Length; i++)
-            {
-                if (_parkedVehicles[i] == null)
-                {
-                    _parkedVehicles[i] = (T)newAirplane;
-                    NumberOfParkedVehicles++;
-                    break;
-                }
-            }
-        }
-
-        */
 
         //Metod för att ta bort ett fordon
         internal bool RemoveVehicle(string regNumber)

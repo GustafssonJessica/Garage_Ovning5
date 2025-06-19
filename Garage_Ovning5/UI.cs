@@ -13,13 +13,12 @@ namespace Garage_Ovning5
         //Huvudmeny
         public char ShowMainMenu()
         {
-            string message = "Välkommen till garageapplikationen. Du kommer nu få ett antal alternativ:" +
-                             "\n1) Skapa ett nytt garage" +
-                             "\n2) Parkera fordon i garaget" +
-                             "\n3) Ta bort fordon från garaget"+
-                             "\n4) Lista samtliga fordon i garagen " +
-                             "\n5) Lista hur många av de olika fordonstyperna som står i garaget" +
-                             "\n6) Sök efter fordon i garage" + //TOdo lägga till att man kan populera garaget från början
+            string message = "Du kommer nu få ett antal alternativ:" +
+                             "\n1) Parkera fordon i garaget" +
+                             "\n2) Ta bort fordon från garaget"+
+                             "\n3) Lista samtliga fordon i garagen " +
+                             "\n4) Lista hur många av de olika fordonstyperna som står i garaget" +
+                             "\n5) Sök efter fordon i garage" + //TOdo lägga till att man kan populera garaget från början
                              "\n0) Stäng applikationen" +
                              "\n\nAnge ett val (0-5):";
 
@@ -29,8 +28,7 @@ namespace Garage_Ovning5
 
         public int GetNewGarageInfo()
         {
-            //todo Kolla så det inte redan finns ett garage
-            string message = "Du har valt att skapa ett nytt garage. Hur många parkeringsplatser ska garaget innehålla?";
+            string message = "Välkommen till denna garageapplikation. Du behöver skapa ett garage för att gå vidare. \nHur många parkeringsplatser ska garaget innehålla?";
             return ReturnInt(message);
         }
 
@@ -55,7 +53,7 @@ namespace Garage_Ovning5
         {
             do
             {
-                string input = ReturnString(message); //jag tror jag kommer bli missnöjd för att ReturnChar och returnInt kommer att skriva ut message varje gång anv gör fel
+                string input = ReturnString(message); 
                 if (input.Length > 1)
                 {
                     Console.WriteLine("Du har angett mer än ett tecken. Var god försök igen");
@@ -136,7 +134,7 @@ namespace Garage_Ovning5
             bool validRegNumber = true;
             do
             {
-                regNumber = ReturnString("Ange Registreringsnummer, format: XXX111 (OBS måste vara unikt för att fordonet ska skapas) ");
+                regNumber = ReturnString("Ange Registreringsnummer, format: XXX111 (OBS måste vara unikt för att fordonet ska skapas) "); //TOdo visa vilka regNUmmer som redan finns
                 if (regNumber.Length != 6)
                 {
                     Console.WriteLine("Felaktigt antal tecken. Det måste vara 6 tecken");
@@ -152,27 +150,19 @@ namespace Garage_Ovning5
                     validRegNumber = true;
                 }
             } while (!validRegNumber);
-            // Måste validera om regNumret är unikt eller ej. För att göra det måste regNumret
-            //skickas till Mangager och vidare till garageHandler där det jämförst med existerande fordon (LINQ?)
-
-            //JUst nu returneras regNumber som 
-
-
-
-
 
             brand = ReturnString("Märke: ");
 
-            //todo denna finns både här och i filtrera fordon-metoden, kanske bryta ut?
             Console.WriteLine("Välj färg genom att ange rätt nummer: ");
             foreach (Color color in Enum.GetValues(typeof(Color)))
             {
-                Console.WriteLine($"{(int)color} - {color}");
+                Console.WriteLine($"{(int)color + 1} - {color}");
             }
 
             while (true)
             {
                 int colorChoice = ReturnInt("");
+                colorChoice--;
                 if (Enum.IsDefined(typeof(Color), colorChoice))
                 {
                     vehicleColor = (Color)colorChoice;
@@ -193,11 +183,12 @@ namespace Garage_Ovning5
 
             foreach (FuelType fuels in Enum.GetValues(typeof(FuelType)))
             {
-                Console.WriteLine($"{(int)fuels} - {fuels}");
+                Console.WriteLine($"{(int)fuels + 1} - {fuels}");
             }
             while (true)
             {
                 int fuel = ReturnInt("");
+                fuel--;
                 if (Enum.IsDefined(typeof(FuelType), fuel))
                 {
                     fuelType = (FuelType)fuel;
@@ -391,7 +382,7 @@ namespace Garage_Ovning5
 
         public void PrintGarageFullMessage()
         {
-            Console.WriteLine($"Fordonet kunde inte parkeras då det redan finns ett fordon med detta registreringsnummer i garaget."); //todo skriv med regnummer om tid finns
+            Console.WriteLine($"Ett nytt fordon kan inte parkeras just nu, garaget är fullt"); 
         }
 
         public void ShowVehicleTypes(Dictionary<string, int> typesAndNumbers)
@@ -430,6 +421,11 @@ namespace Garage_Ovning5
             {
                 Console.WriteLine($"Kunde inte ta bort fordonet med registreringsnummer {regNumber}. Det finns inget fordon med det registreringsnumret i garaget.");
             }
+        }
+
+        public void PrintNotUnicRegNmr()
+        {
+            Console.WriteLine("Fordonet kunde inte parkeras, det finns redan ett fordon med detta registreringsnummer i garaget");
         }
     }
 }

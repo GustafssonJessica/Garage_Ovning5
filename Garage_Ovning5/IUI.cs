@@ -17,6 +17,7 @@ namespace Garage_Ovning5
         void PrintGarageCreatedMessage(int garageSize, bool garageCreated);
         void PrintGarageFullMessage();
         void PrintNoGarageMessage();
+        void PrintNotUnicRegNmr();
         void PrintVehicleParkedMessage();
         void PrintVehicleRemovedMessage(bool vehicleRemoved, string regNumber);
         char ReturnChar(string message);
