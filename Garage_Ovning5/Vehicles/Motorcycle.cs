@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Garage_Ovning5.Vehicles
 {
-    internal class Motorcycle : Vehicle
+    public class Motorcycle : Vehicle
     {
         public int CylinderVolume { get; set; }
 

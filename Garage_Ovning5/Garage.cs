@@ -17,7 +17,7 @@ namespace Garage_Ovning5
 
         public int NumberOfParkedVehicles { get; set; }
 
-        public int NumberOfAvailableSpots => MaxCapacity - NumberOfParkedVehicles;
+        public int NumberOfAvailableSpots => MaxCapacity - NumberOfParkedVehicles; //TOdo ta bort denna, finns ingen referens till den
 
         public bool IsFull => NumberOfParkedVehicles == MaxCapacity ? true : false;
 
@@ -44,7 +44,7 @@ namespace Garage_Ovning5
 
 
         //Metod för att parkera ett fordon i garaget 
-        internal void ParkVehicle(T vehicle)
+        public void ParkVehicle(T vehicle)
         {
             if (IsFull)
                 throw new InvalidOperationException("Garaget är fullt.");//TOdo gör så att den returnerar en bool
@@ -60,7 +60,7 @@ namespace Garage_Ovning5
         }
 
         //Metod för att ta bort ett fordon
-        internal bool RemoveVehicle(string regNumber)
+        public bool RemoveVehicle(string regNumber)
         {
             for (int i = 0; i < _parkedVehicles.Length; i++)
             {
@@ -75,13 +75,14 @@ namespace Garage_Ovning5
             return false;
         }
 
+        //Metod för att hämta alla fordon i garaget
         public IEnumerable<Vehicle> GetAllVehicles()
         {
             return _parkedVehicles.Where(v => v != null); //Returnerar alla fordon som inte är null
         }
 
         // Metod för att hämta filtrerade fordon i garaget med hjälp av LINQ
-        internal IEnumerable<Vehicle> GetFilteredVehicles(string type, string regNumber, Color? color, string brand)
+        public IEnumerable<Vehicle> GetFilteredVehicles(string type, string regNumber, Color? color, string brand)
         {
             var selection = _parkedVehicles.Where(v => v != null); //sorterar bort alla null-värden i arrayen
             var selection2 = selection.Where(v =>
@@ -91,6 +92,17 @@ namespace Garage_Ovning5
                     (string.IsNullOrEmpty(brand) || v.Brand.Equals(brand, StringComparison.OrdinalIgnoreCase))
                 );
             return selection2;
+        }
+
+
+        // Metod för att köra testläge, skapar ett garage och parkerar fordon för testning
+        public void Park5Vehicles()
+        {
+            ParkVehicle((T)(Vehicle)new Car("ABC123", "Volvo", Color.Red, FuelType.Gasoline));
+            ParkVehicle((T)(Vehicle)new Motorcycle("DEF456", "Yamaha", Color.Blue, 600));
+            ParkVehicle((T)(Vehicle)new Boat("GHI789", "Buster", Color.Green, 5));
+            ParkVehicle((T)(Vehicle)new Bus("JKL012", "Scania", Color.Yellow, true));
+            ParkVehicle((T)(Vehicle)new Airplane("MNO345", "Boeing", Color.White, 150));
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Garage_Ovning5.Vehicles
 {
-    internal class Airplane : Vehicle
+    public class Airplane : Vehicle
     {
         private int _numberOfSeats;
 

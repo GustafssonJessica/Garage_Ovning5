@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Garage_Ovning5
 {
-    internal class Manager
+    public class Manager
     {
         private IUI _ui;
         private IGarageHandler _garageHandler;
@@ -155,16 +155,16 @@ namespace Garage_Ovning5
         }
 
         // Metod för att köra testläge, skapar ett garage och parkerar fordon för testning
-        internal void RunTestMode()
+        public void Park5Vehicles()
         {
-            _garageHandler.CreateGarage(5); // Skapar ett garage med 5 platser för testning
+         //   _garageHandler.CreateGarage(5); // Skapar ett garage med 5 platser för testning
             _garageHandler.ParkVehicle(new Car("ABC123", "Volvo", Color.Red, FuelType.Gasoline));
             _garageHandler.ParkVehicle(new Motorcycle("DEF456", "Yamaha", Color.Blue, 600));
             _garageHandler.ParkVehicle(new Boat("GHI789", "Buster", Color.Green, 5));
             _garageHandler.ParkVehicle(new Bus("JKL012", "Scania", Color.Yellow, true));
             _garageHandler.ParkVehicle(new Airplane("MNO345", "Boeing", Color.White, 150));
-            IEnumerable<Vehicle> allVehicles = _garageHandler.ReturnAllVehicles();
-            _ui.PrintAllVehicles(allVehicles); // Skriver ut alla fordon i garaget
+           // IEnumerable<Vehicle> allVehicles = _garageHandler.ReturnAllVehicles();
+            //_ui.PrintAllVehicles(allVehicles); // Skriver ut alla fordon i garaget
         }
     }
 }

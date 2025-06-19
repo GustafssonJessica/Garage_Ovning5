@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Garage_Ovning5.Vehicles
 {
-    internal class Boat : Vehicle
+    public class Boat : Vehicle
     {
         private int _length;
         public int Length
