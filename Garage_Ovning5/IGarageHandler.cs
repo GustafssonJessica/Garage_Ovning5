@@ -6,6 +6,7 @@ namespace Garage_Ovning5
     {
         bool CheckIfGarageExists();
         bool CheckIfGarageIsFull();
+        void CreateDefaultGarage();
         bool CreateGarage(int maxCapacity);
         bool DeleteVehicle(string regNumber);
         Dictionary<string, int> GetVehicleTypes();

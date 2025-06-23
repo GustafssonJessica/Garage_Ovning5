@@ -26,9 +26,30 @@ namespace Garage_Ovning5
             return choice;
         }
 
+        // Metod för att skriva ut välkomstmeddelande och be användaren välja mellan att skapa ett nytt garage eller ett garage med fördefinierade fordon
+        public int PrintWelcomeMessage()
+        {
+            int choice;
+            bool sucess = true;
+            do
+            {
+                string message = ("Välkommen till denna garageapplikation. Du kommer nu få två val: \n1) Skapa ett nytt tomt garage \n2) Skapa ett 10-platsers garage med 5 fördefinierade fordon");
+                choice = ReturnInt(message);
+                if (choice < 1 || choice > 2)
+                {
+                    Console.WriteLine("Ogiltigt val. Var god försök igen");
+                    sucess = false;
+                }
+                else
+                    sucess = true;
+            } while (!sucess);
+            return choice;
+        }
+
+
         public int GetNewGarageInfo()
         {
-            string message = "Välkommen till denna garageapplikation. Du behöver skapa ett garage för att gå vidare. \nHur många parkeringsplatser ska garaget innehålla?";
+            string message = "Hur många parkeringsplatser ska garaget innehålla?";
             return ReturnInt(message);
         }
 
@@ -448,6 +469,11 @@ namespace Garage_Ovning5
         public void ReturnToMainMenuMessage()
         {
             Console.WriteLine("\nTryck Enter för att komma tillbaka till huvudmenyn");
+        }
+
+        public void PrintDefaultGarageCreatedMessage()
+        {
+            Console.WriteLine("Ett fördefinierat 10-platsers garage med 5 fordon har nu skapats.");
         }
     }
 }

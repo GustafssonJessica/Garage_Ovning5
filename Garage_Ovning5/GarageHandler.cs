@@ -57,7 +57,7 @@ namespace Garage_Ovning5
         }
 
         // Metod för att returnera alla fordon i garaget
-        public IEnumerable<Vehicle> ReturnAllVehicles() 
+        public IEnumerable<Vehicle> ReturnAllVehicles()
         {
             if (_garage!.NumberOfParkedVehicles == 0)
             {
@@ -92,7 +92,7 @@ namespace Garage_Ovning5
         {
             if (_garage == null)
             {
-                return new Dictionary<string, int>(); 
+                return new Dictionary<string, int>();
             }
 
             return _garage.Where(v => v != null).
@@ -108,6 +108,12 @@ namespace Garage_Ovning5
                 return true;
             }
             return false;
+        }
+
+        public void CreateDefaultGarage()
+        {
+            _garage = new Garage<Vehicle>(10);
+            _garage!.Park5Vehicles();
         }
     }
 }

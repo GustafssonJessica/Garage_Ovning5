@@ -21,10 +21,19 @@ namespace Garage_Ovning5
 
         internal void Run()
         {
-            //Skapa ett nytt garage
-            int garageSize = _ui.GetNewGarageInfo();
-            bool garageCreated = _garageHandler.CreateGarage(garageSize);
-            _ui.PrintGarageCreatedMessage(garageSize, garageCreated);
+            // Skapa ett garage
+            int garageChoice = _ui.PrintWelcomeMessage();
+            if (garageChoice == 1)
+            {
+                int garageSize = _ui.GetNewGarageInfo();
+                bool garageCreated = _garageHandler.CreateGarage(garageSize);
+                _ui.PrintGarageCreatedMessage(garageSize, garageCreated);
+            }
+            else if (garageChoice == 2)
+            {
+                _garageHandler.CreateDefaultGarage();
+                _ui.PrintDefaultGarageCreatedMessage();
+            }
             do
             {
                 //Visa huvudmenyn och returnerar användarens val
@@ -39,10 +48,10 @@ namespace Garage_Ovning5
                         if (garageIsFull)
                         {
                             _ui.PrintGarageFullMessage();
-                            continue; 
+                            continue;
                         }
 
-                        string typeOfVehicle = _ui.ReturnVehicleType(); 
+                        string typeOfVehicle = _ui.ReturnVehicleType();
                         string regNumber;
                         string brand;
                         Color vehicleColor;
@@ -121,10 +130,10 @@ namespace Garage_Ovning5
 
                     default:
                         // Visa meddelande om ogiltig input
-                        _ui.InvalidInputMessage(); 
+                        _ui.InvalidInputMessage();
                         break;
                 }
-                
+
                 _ui.ReturnToMainMenuMessage();
                 Console.ReadLine(); // Väntar på att användaren trycker på Enter innan nästa iteration
                 Console.Clear(); // Rensar konsolen för att visa huvudmenyn igen

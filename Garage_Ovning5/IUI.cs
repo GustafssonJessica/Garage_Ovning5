@@ -14,6 +14,7 @@ namespace Garage_Ovning5
         void GetVehicleInfo(out string regNumber, out string brand, out Color vehicleColor);
         void InvalidInputMessage();
         void PrintAllVehicles(IEnumerable<Vehicle> vehicles);
+        void PrintDefaultGarageCreatedMessage();
         void PrintFilteredVehicles(IEnumerable<Vehicle> filteredVehicles);
         void PrintGarageCreatedMessage(int garageSize, bool garageCreated);
         void PrintGarageFullMessage();
@@ -21,6 +22,7 @@ namespace Garage_Ovning5
         void PrintNotUnicRegNmr();
         void PrintVehicleParkedMessage();
         void PrintVehicleRemovedMessage(bool vehicleRemoved, string regNumber);
+        int PrintWelcomeMessage();
         char ReturnChar(string message);
         int ReturnInt(string message);
         string ReturnString(string message);
