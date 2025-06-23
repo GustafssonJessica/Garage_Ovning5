@@ -91,7 +91,7 @@ namespace Garage_Ovning5
         {
             if (_garage == null)
             {
-                return new Dictionary<string, int>(); //eller annan lösning?
+                return new Dictionary<string, int>(); 
             }
 
             return _garage.Where(v => v != null).

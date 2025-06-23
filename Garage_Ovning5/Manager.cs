@@ -25,11 +25,9 @@ namespace Garage_Ovning5
             int garageSize = _ui.GetNewGarageInfo();
             bool garageCreated = _garageHandler.CreateGarage(garageSize);
             _ui.PrintGarageCreatedMessage(garageSize, garageCreated);
-
             do
             {
-
-                //Visar huvudmenyn och returnerar användarens val
+                //Visa huvudmenyn och returnerar användarens val
                 char choice = _ui.ShowMainMenu();
 
                 //Switch-sats för att hantera användarens val
@@ -41,11 +39,10 @@ namespace Garage_Ovning5
                         if (garageIsFull)
                         {
                             _ui.PrintGarageFullMessage();
-                            continue; // Om garaget är fullt, hoppa vidare till nästa iteration
+                            continue; 
                         }
 
-                        //Parkera ett fordon
-                        string typeOfVehicle = _ui.ReturnVehicleType(); // Metod för att få tillbaka fordonstypen
+                        string typeOfVehicle = _ui.ReturnVehicleType(); 
                         string regNumber;
                         string brand;
                         Color vehicleColor;
@@ -89,39 +86,49 @@ namespace Garage_Ovning5
                             else
                                 _ui.PrintNotUnicRegNmr();
                         }
-
                         break;
+
                     case '2':
                         // Radera ett fordon
                         regNumber = _ui.GetDeleteInfo();
                         bool vehicleRemoved = _garageHandler.DeleteVehicle(regNumber);
                         _ui.PrintVehicleRemovedMessage(vehicleRemoved, regNumber);
                         break;
+
                     case '3':
                         // Visa alla fordon i garaget
                         IEnumerable<Vehicle> vehicles = _garageHandler.ReturnAllVehicles();
                         _ui.PrintAllVehicles(vehicles);
                         break;
+
                     case '4':
                         // Lista fordonstyper och hur många av varje som står i garaget
                         var typesAndNumbers = _garageHandler.GetVehicleTypes();
                         _ui.ShowVehicleTypes(typesAndNumbers);
                         break;
+
                     case '5':
                         // Sök efter fordon i garaget
                         _ui.SelectSearchFilters(out string type, out regNumber, out Color? color, out brand);
                         IEnumerable<Vehicle> filteredVehicles = _garageHandler.SearchVehicles(type, regNumber, color, brand);
                         _ui.PrintFilteredVehicles(filteredVehicles);
                         break;
+
                     case '0':
                         // Avsluta programmet
                         Environment.Exit(0);
                         break;
+
                     default:
+                        // Visa meddelande om ogiltig input
+                        _ui.InvalidInputMessage(); 
                         break;
                 }
+                
+                _ui.ReturnToMainMenuMessage();
                 Console.ReadLine(); // Väntar på att användaren trycker på Enter innan nästa iteration
                 Console.Clear(); // Rensar konsolen för att visa huvudmenyn igen
+
             } while (true);
         }
     }

@@ -5,13 +5,10 @@ namespace Garage_Ovning5.Tests
 {
     public class Garage_tests
     {
+        // Test för att se att det går att lägga till ett fordon i garaget
         [Fact]
         public void ParkVehicle_AddingANewUnicVehicle_VehicleAdded()
         {
-            //[MethodName_StateUnderTest_ExpectedBehavior]
-
-            //Public void Sum_NegativeNumberAs1stParam_ExceptionThrown() 
-
             //Arrange 
             Garage<Vehicle> garage = new Garage<Vehicle>(5);
             Vehicle vehicle = new Car("ABC123", "Ford", Color.Red, FuelType.Diesel);
@@ -21,24 +18,7 @@ namespace Garage_Ovning5.Tests
             Assert.Contains(vehicle, garage);
         }
 
-        // Todo ta bort Test för att se att fordon av olika slag kan läggas till i garaget
-        [Fact]
-        public void Park5Vehicles_5vehiclesInGarage_Returns5Vehicles()
-        {
-            // Arrange
-            Garage<Vehicle> garage = new Garage<Vehicle>(10);
-            // Act
-            garage.Park5Vehicles();
-            // Assert
-            Assert.Equal(5, garage.NumberOfParkedVehicles);
-        }
-
-        //en metod för att se vad som händer om garaget är fullt och man lägger till ett till fordon
-        // Metod för att se vad som händer om man försöker parkera ett fordon med samma registreringsnummer som ett redan parkerat fordon - NEJ, ligger i GarageHandler nu
-        // Om garaget inte är skapat
-
-
-        // Test för att testa enumeratorn fungerar
+        // Test för att se att enumeratorn fungerar
         [Fact]
         public void GetEnumerator_EnumerateVehicles_ReturnsAllParkedVehicles()
         {
@@ -55,19 +35,16 @@ namespace Garage_Ovning5.Tests
             Assert.Equal(5, parkedVehicles.Count);
         }
 
-
-
-
-
         // Test för att se att man kan söka på fordon i garaget
         [Fact]
         public void GetFilteredVehicles_SearchColorGreen_ReturnBoat()
         {
+            // Arrange
             Garage<Vehicle> garage = new Garage<Vehicle>(5);
             garage.Park5Vehicles();
-
+            // Act
             IEnumerable<Vehicle> vehicles = garage.GetFilteredVehicles("", "", Color.Green, "");
-
+            // Assert
             Assert.Contains(vehicles, v => v.Color == Color.Green && v is Boat);
         }
 
@@ -75,14 +52,15 @@ namespace Garage_Ovning5.Tests
         [Fact]
         public void GetFilteredVehicles_SearchBrandToyota_NoVehiclesReturned()
         {
+            // Arrange
             Garage<Vehicle> garage = new Garage<Vehicle>(5);
             garage.Park5Vehicles();
-
+            // Act
             IEnumerable<Vehicle> vehicles = garage.GetFilteredVehicles("", "", null, "Toyota");
-
+            // Assert
             Assert.DoesNotContain(vehicles, v => v.Brand == "Toyota");
         }
-        
+
 
         // Test för att se att man kan radera ett fordon från garaget
         [Fact]

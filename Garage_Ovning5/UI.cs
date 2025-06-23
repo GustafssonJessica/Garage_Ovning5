@@ -18,7 +18,7 @@ namespace Garage_Ovning5
                              "\n2) Ta bort fordon från garaget"+
                              "\n3) Lista samtliga fordon i garagen " +
                              "\n4) Lista hur många av de olika fordonstyperna som står i garaget" +
-                             "\n5) Sök efter fordon i garage" + //TOdo lägga till att man kan populera garaget från början
+                             "\n5) Sök efter fordon i garage" +
                              "\n0) Stäng applikationen" +
                              "\n\nAnge ett val (0-5):";
 
@@ -38,7 +38,7 @@ namespace Garage_Ovning5
             do
             {
                 string? input = Console.ReadLine();
-                if (string.IsNullOrEmpty(input) || string.IsNullOrWhiteSpace(input)) // ok validera för båda dessa här?
+                if (string.IsNullOrEmpty(input) || string.IsNullOrWhiteSpace(input))
                 {
                     Console.WriteLine("Tom inmatning. Var god försök igen");
                 }
@@ -53,7 +53,7 @@ namespace Garage_Ovning5
         {
             do
             {
-                string input = ReturnString(message); 
+                string input = ReturnString(message);
                 if (input.Length > 1)
                 {
                     Console.WriteLine("Du har angett mer än ett tecken. Var god försök igen");
@@ -175,7 +175,7 @@ namespace Garage_Ovning5
             }
         }
 
-
+        // Metod för att hämta information om bil
         public void GetCarInfo(out string regNumber, out string brand, out Color vehicleColor, out FuelType fuelType)
         {
             GetVehicleInfo(out regNumber, out brand, out vehicleColor);
@@ -200,6 +200,9 @@ namespace Garage_Ovning5
                 }
             }
         }
+
+        // Metod för att hämta information om båt
+
         public void GetBoatInfo(out string regNumber, out string brand, out Color vehicleColor, out int length)
         {
             GetVehicleInfo(out regNumber, out brand, out vehicleColor);
@@ -213,6 +216,7 @@ namespace Garage_Ovning5
             cylinderVolume = ReturnInt("Ange motorcykelns cylindervolym: ");
         }
 
+        // Metod för att hämta information om buss
         public void GetBusInfo(out string regNumber, out string brand, out Color vehicleColor, out bool hasSeatBelts)
         {
             GetVehicleInfo(out regNumber, out brand, out vehicleColor);
@@ -237,6 +241,7 @@ namespace Garage_Ovning5
             }
         }
 
+        // Metod för att hämta information om flygplan
         public void GetAirplaneInfo(out string regNumber, out string brand, out Color vehicleColor, out int numberOfSeats)
         {
             GetVehicleInfo(out regNumber, out brand, out vehicleColor);
@@ -271,8 +276,6 @@ namespace Garage_Ovning5
         // Metod för att hämta sökkriterier för att filtrera fordon i garaget
         public void SelectSearchFilters(out string nameOfVehicle, out string regNmr, out Color? color, out string brand)
         {
-            //svårt använda returnString när det får vara null/empty
-
             int type;
             bool correctVehicleNumber = true;
             nameOfVehicle = string.Empty;
@@ -355,6 +358,7 @@ namespace Garage_Ovning5
             brand = Console.ReadLine() ?? string.Empty;
         }
 
+        // Metod för att skriva ut filtrerade fordon baserat på sökkriterier
         public void PrintFilteredVehicles(IEnumerable<Vehicle> filteredVehicles)
         {
             if (!filteredVehicles.Any())
@@ -370,21 +374,7 @@ namespace Garage_Ovning5
             }
         }
 
-        public void PrintNoGarageMessage()
-        {
-            Console.WriteLine("Du måste skapa ett garage innan du kan utföra denna åtgärd.");
-        }
-
-        public void PrintVehicleParkedMessage()
-        {
-            Console.WriteLine($"Fordonet är nu parkerad i garaget!"); //TOdo om tid: skicka med fordonets regnumber plus numberOFAvaiablespots att skriva ut \nDet finns {_garage.NumberOfAvailableSpots} platser kvar i garaget.");
-        }
-
-        public void PrintGarageFullMessage()
-        {
-            Console.WriteLine($"Ett nytt fordon kan inte parkeras just nu, garaget är fullt"); 
-        }
-
+        // Metod för att visa fordonstyper och antal i garaget
         public void ShowVehicleTypes(Dictionary<string, int> typesAndNumbers)
         {
 
@@ -401,11 +391,29 @@ namespace Garage_Ovning5
             }
         }
 
+
+        // Metoder för att skriva ut olika meddelanden till användaren
+
+        public void PrintNoGarageMessage()
+        {
+            Console.WriteLine("Du måste skapa ett garage innan du kan utföra denna åtgärd.");
+        }
+
+        public void PrintVehicleParkedMessage()
+        {
+            Console.WriteLine($"Fordonet är nu parkerad i garaget!");
+        }
+
+        public void PrintGarageFullMessage()
+        {
+            Console.WriteLine($"Ett nytt fordon kan inte parkeras just nu, garaget är fullt");
+        }
+
         public void PrintGarageCreatedMessage(int garageSize, bool garageCreated)
         {
             if (garageCreated)
             {
-                Console.WriteLine($"Ett nytt garage med {garageSize} parkeringsplatser har skapats!");
+                Console.WriteLine($"Ett nytt garage med {garageSize} parkeringsplatser har skapats!\n");
                 return;
             }
             Console.WriteLine("Garaget kunde tyvärr inte skapas. Var god försök igen");
@@ -419,13 +427,23 @@ namespace Garage_Ovning5
             }
             else
             {
-                Console.WriteLine($"Kunde inte ta bort fordonet med registreringsnummer {regNumber}. Det finns inget fordon med det registreringsnumret i garaget.");
+                Console.WriteLine($"Kunde inte ta bort fordonet med registreringsnummer {regNumber}. \nDet finns inget fordon med det registreringsnumret i garaget.");
             }
         }
 
         public void PrintNotUnicRegNmr()
         {
             Console.WriteLine("Fordonet kunde inte parkeras, det finns redan ett fordon med detta registreringsnummer i garaget");
+        }
+
+        public void InvalidInputMessage()
+        {
+            Console.WriteLine("Ogiltig inmatning. Tryck på Enter för att komma tillbaka till huvudmenyn");
+        }
+
+        public void ReturnToMainMenuMessage()
+        {
+            Console.WriteLine("\nTryck Enter för att komma tillbaka till huvudmenyn");
         }
     }
 }

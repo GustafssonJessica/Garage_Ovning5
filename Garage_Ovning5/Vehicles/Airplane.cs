@@ -9,7 +9,6 @@ namespace Garage_Ovning5.Vehicles
     public class Airplane : Vehicle
     {
         private int _numberOfSeats;
-
         public int NumberOfSeats
         {
             get => _numberOfSeats;

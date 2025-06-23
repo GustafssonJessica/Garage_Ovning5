@@ -10,10 +10,9 @@ namespace Garage_Ovning5.Vehicles
 {
     public abstract class Vehicle
     {
-        private string _registrationNumber; //TOdo måste vara unikt 
+        private string _registrationNumber = null!;
         public string Brand { get; set; }
         public Color Color { get; set; }
-
 
         public Vehicle(string regNumber, string brand, Color color)
         {
@@ -22,12 +21,11 @@ namespace Garage_Ovning5.Vehicles
             Color = color;
         }
 
-        public string RegistrationNumber //todo se hur göra så att detta körs i UI när anv skapar fordon
+        public string RegistrationNumber 
         {
             get => _registrationNumber;
             set
             {
-                //Validerar att första 3 är bokstäver och sista 3 är siffror
                 for (int i = 0; i < 3; i++)
                 {
                     if (!Regex.IsMatch(value[i].ToString(), "^[a-öA-Ö]$"))

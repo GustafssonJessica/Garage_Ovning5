@@ -17,8 +17,6 @@ namespace Garage_Ovning5
 
         public int NumberOfParkedVehicles { get; set; }
 
-        public int NumberOfAvailableSpots => MaxCapacity - NumberOfParkedVehicles; //TOdo ta bort denna, finns ingen referens till den
-
         public bool IsFull => NumberOfParkedVehicles == MaxCapacity ? true : false;
 
 
@@ -48,8 +46,6 @@ namespace Garage_Ovning5
         //Metod för att parkera ett fordon i garaget 
         public void ParkVehicle(T vehicle)
         {
-            //if (IsFull)
-            //    throw new InvalidOperationException("Garaget är fullt.");//TOdo gör så att den returnerar en bool istället
             for (int i = 0; i < _parkedVehicles.Length; i++)
             {
                 if (_parkedVehicles[i] == null)
@@ -69,7 +65,7 @@ namespace Garage_Ovning5
                 if (_parkedVehicles[i] != null &&
                     string.Equals(_parkedVehicles[i]!.RegistrationNumber, regNumber, StringComparison.OrdinalIgnoreCase)) //Jämför strängarna, okej med stora/små bokstäver
                 {
-                    _parkedVehicles[i] = null; //todo fixa den udnerstrukna
+                    _parkedVehicles[i] = null;
                     NumberOfParkedVehicles--;
                     return true;
                 }
@@ -80,7 +76,7 @@ namespace Garage_Ovning5
         //Metod för att hämta alla fordon i garaget
         public IEnumerable<Vehicle> GetAllVehicles()
         {
-            return _parkedVehicles.Where(v => v != null).Select(v => v!); //Returnerar alla fordon som inte är null
+            return _parkedVehicles.Where(v => v != null).Select(v => v!);
         }
 
         // Metod för att hämta filtrerade fordon i garaget med hjälp av LINQ
