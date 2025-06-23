@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 namespace Garage_Ovning5
 {
     public class Garage<T> : IEnumerable<T> where T : Vehicle
-       
+
     {
-        private T[] _parkedVehicles;
+        private T?[] _parkedVehicles;
         public int MaxCapacity { get; private set; }
 
         public int NumberOfParkedVehicles { get; set; }
@@ -32,11 +32,13 @@ namespace Garage_Ovning5
         //Metod för att kunna iterera över fordonen i garaget
         public IEnumerator<T> GetEnumerator()
         {
-            foreach (T vehicle in _parkedVehicles)
+            foreach (T? vehicle in _parkedVehicles)
             {
-                yield return vehicle;
+                if (vehicle != null)
+                {
+                    yield return vehicle;
+                }
             }
-
         }
 
         //Metod för att den generiska GetEnumerator ovan ska användas
@@ -65,7 +67,7 @@ namespace Garage_Ovning5
             for (int i = 0; i < _parkedVehicles.Length; i++)
             {
                 if (_parkedVehicles[i] != null &&
-                    string.Equals(_parkedVehicles[i].RegistrationNumber, regNumber, StringComparison.OrdinalIgnoreCase)) //Jämför strängarna, ok med stora/små bokstäver
+                    string.Equals(_parkedVehicles[i]!.RegistrationNumber, regNumber, StringComparison.OrdinalIgnoreCase)) //Jämför strängarna, okej med stora/små bokstäver
                 {
                     _parkedVehicles[i] = null; //todo fixa den udnerstrukna
                     NumberOfParkedVehicles--;
@@ -78,24 +80,24 @@ namespace Garage_Ovning5
         //Metod för att hämta alla fordon i garaget
         public IEnumerable<Vehicle> GetAllVehicles()
         {
-            return _parkedVehicles.Where(v => v != null); //Returnerar alla fordon som inte är null
+            return _parkedVehicles.Where(v => v != null).Select(v => v!); //Returnerar alla fordon som inte är null
         }
 
         // Metod för att hämta filtrerade fordon i garaget med hjälp av LINQ
         public IEnumerable<Vehicle> GetFilteredVehicles(string type, string regNumber, Color? color, string brand)
         {
             var selection = _parkedVehicles.Where(v => v != null); //sorterar bort alla null-värden i arrayen
-            var selection2 = selection.Where(v =>
+            var selection2 = selection.Where(v => v != null &&
                     (string.IsNullOrEmpty(type) || v.GetType().Name.Equals(type, StringComparison.OrdinalIgnoreCase)) && //todo kanske inte  inte optimalt att jämföra med namn på klasserna
                     (string.IsNullOrEmpty(regNumber) || v.RegistrationNumber.Equals(regNumber, StringComparison.OrdinalIgnoreCase)) &&
                     (!color.HasValue || v.Color == color.Value) &&
                     (string.IsNullOrEmpty(brand) || v.Brand.Equals(brand, StringComparison.OrdinalIgnoreCase))
                 );
-            return selection2;
+            return selection2.Select(v => v!);
         }
 
 
-        // Metod för att köra testläge, skapar ett garage och parkerar fordon för testning
+        // Metod för att köra testläge, parkerar 5 fordon
         public void Park5Vehicles()
         {
             ParkVehicle((T)(Vehicle)new Car("ABC123", "Volvo", Color.Red, FuelType.Gasoline));

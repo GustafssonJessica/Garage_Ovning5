@@ -21,9 +21,9 @@ namespace Garage_Ovning5.Tests
             Assert.Contains(vehicle, garage);
         }
 
-        // Test för att se att fordon av olika slag kan läggas till i garaget
+        // Todo ta bort Test för att se att fordon av olika slag kan läggas till i garaget
         [Fact]
-        public void Park5Vehicles_5vehiclesInGarage_Return5Vehicles()
+        public void Park5Vehicles_5vehiclesInGarage_Returns5Vehicles()
         {
             // Arrange
             Garage<Vehicle> garage = new Garage<Vehicle>(10);
@@ -34,12 +34,27 @@ namespace Garage_Ovning5.Tests
         }
 
         //en metod för att se vad som händer om garaget är fullt och man lägger till ett till fordon
-        // Metod för att se vad som händer om man försöker parkera ett fordon med samma registreringsnummer som ett redan parkerat fordon
+        // Metod för att se vad som händer om man försöker parkera ett fordon med samma registreringsnummer som ett redan parkerat fordon - NEJ, ligger i GarageHandler nu
         // Om garaget inte är skapat
 
 
-        // Test för att     prova enumeratorn
-       
+        // Test för att testa enumeratorn fungerar
+        [Fact]
+        public void GetEnumerator_EnumerateVehicles_ReturnsAllParkedVehicles()
+        {
+            // Arrange
+            Garage<Vehicle> garage = new Garage<Vehicle>(5);
+            garage.Park5Vehicles();
+            // Act
+            List<Vehicle> parkedVehicles = new List<Vehicle>();
+            foreach (var vehicle in garage)
+            {
+                parkedVehicles.Add(vehicle);
+            }
+            // Assert
+            Assert.Equal(5, parkedVehicles.Count);
+        }
+
 
 
 

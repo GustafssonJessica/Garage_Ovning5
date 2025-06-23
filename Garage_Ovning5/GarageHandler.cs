@@ -30,11 +30,11 @@ namespace Garage_Ovning5
         public bool ParkVehicle(Vehicle vehicle)
         {
             //Funktion för att jämföra om vehiclen som skickas med har ett unikt registreringsnummer
-            if (_garage.Any(v => v != null && v.RegistrationNumber.Equals(vehicle.RegistrationNumber, StringComparison.OrdinalIgnoreCase)))
+            if (_garage!.Any(v => v != null && v.RegistrationNumber.Equals(vehicle.RegistrationNumber, StringComparison.OrdinalIgnoreCase)))
             {
                 return false;
             }
-            if (_garage.IsFull)
+            if (_garage!.IsFull)
             {
                 return false;
             }
@@ -46,21 +46,20 @@ namespace Garage_Ovning5
         // Metod för att ta bort ett fordon från garaget baserat på registreringsnummer
         public bool DeleteVehicle(string regNumber)
         {
-            // Hitta fordonet med rätt registreringsnummer med LINQ
-            var vehicle = _garage.FirstOrDefault(v => v != null && v.RegistrationNumber.Equals(regNumber, StringComparison.OrdinalIgnoreCase));
+            var vehicle = _garage!.FirstOrDefault(v => v != null && v.RegistrationNumber.Equals(regNumber, StringComparison.OrdinalIgnoreCase));
             if (vehicle == null)
             {
                 return false;
             }
 
-            _garage.RemoveVehicle(regNumber);
+            _garage!.RemoveVehicle(regNumber);
             return true;
         }
 
         // Metod för att returnera alla fordon i garaget
-        public IEnumerable<Vehicle> ReturnAllVehicles() //todo lägga till de unika egenskaperna i utskriften?
+        public IEnumerable<Vehicle> ReturnAllVehicles() 
         {
-            if (_garage.NumberOfParkedVehicles == 0)
+            if (_garage!.NumberOfParkedVehicles == 0)
             {
                 return Enumerable.Empty<Vehicle>();
             }
@@ -73,7 +72,7 @@ namespace Garage_Ovning5
             {
                 return Enumerable.Empty<Vehicle>();
             }
-            return _garage.GetFilteredVehicles(type, regNumber, color, brand);
+            return _garage!.GetFilteredVehicles(type, regNumber, color, brand);
         }
 
 
@@ -100,17 +99,14 @@ namespace Garage_Ovning5
                 ToDictionary(g => g.Key, g => g.Count()); //Nyckeln blir det som det grupperas efter på raden över (klassnamn)
         }
 
+        // Metod för att kontrollera om garaget är fullt
         public bool CheckIfGarageIsFull()
         {
-            if (_garage.IsFull)
+            if (_garage != null && _garage.IsFull)
             {
                 return true;
             }
             return false;
         }
     }
-
-    //Metod för att lägga till 10 fordon med ett knapptryck (någon typ av seed??)
-
-
 }

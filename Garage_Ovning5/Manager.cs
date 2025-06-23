@@ -21,10 +21,10 @@ namespace Garage_Ovning5
 
         internal void Run()
         {
-                //Skapa ett nytt garage
-                int garageSize = _ui.GetNewGarageInfo();
-                bool garageCreated = _garageHandler.CreateGarage(garageSize);
-                _ui.PrintGarageCreatedMessage(garageSize, garageCreated);
+            //Skapa ett nytt garage
+            int garageSize = _ui.GetNewGarageInfo();
+            bool garageCreated = _garageHandler.CreateGarage(garageSize);
+            _ui.PrintGarageCreatedMessage(garageSize, garageCreated);
 
             do
             {
@@ -32,33 +32,16 @@ namespace Garage_Ovning5
                 //Visar huvudmenyn och returnerar användarens val
                 char choice = _ui.ShowMainMenu();
 
-                //Kollar så att ett garage existerar innan vissa val kan göras
-                //bool garageExists = true;
-                //if (choice == '2' || choice == '3' || choice == '4' || choice == '5' || choice == '6')
-                //{
-                //    garageExists = GarageExists();
-                //}
-                //if (!garageExists)
-                //{
-                //    continue;
-                //}
-
                 //Switch-sats för att hantera användarens val
                 switch (choice)
                 {
-                    //case '1':
-                        ////Skapa ett nytt garage
-                        //int garageSize = _ui.GetNewGarageInfo();
-                        //bool garageCreated = _garageHandler.CreateGarage(garageSize);
-                        //_ui.PrintGarageCreatedMessage(garageSize, garageCreated);
-                        //break;
                     case '1':
                         //Parkera ett fordon
                         bool garageIsFull = _garageHandler.CheckIfGarageIsFull();
                         if (garageIsFull)
                         {
                             _ui.PrintGarageFullMessage();
-                            continue; // Om garaget är fullt, hoppa över till nästa iteration
+                            continue; // Om garaget är fullt, hoppa vidare till nästa iteration
                         }
 
                         //Parkera ett fordon
@@ -137,34 +120,10 @@ namespace Garage_Ovning5
                     default:
                         break;
                 }
+                Console.ReadLine(); // Väntar på att användaren trycker på Enter innan nästa iteration
+                Console.Clear(); // Rensar konsolen för att visa huvudmenyn igen
             } while (true);
-        }
-
-
-
-        // Metod för att kontrollera om garaget existerar innan vissa operationer utförs
-        internal bool GarageExists()
-        {
-            bool garageExists = _garageHandler.CheckIfGarageExists();
-            if (!garageExists)
-            {
-                _ui.PrintNoGarageMessage();
-                return false;
-            }
-            return true;
-        }
-
-        // Metod för att köra testläge, skapar ett garage och parkerar fordon för testning
-        public void Park5Vehicles()
-        {
-         //   _garageHandler.CreateGarage(5); // Skapar ett garage med 5 platser för testning
-            _garageHandler.ParkVehicle(new Car("ABC123", "Volvo", Color.Red, FuelType.Gasoline));
-            _garageHandler.ParkVehicle(new Motorcycle("DEF456", "Yamaha", Color.Blue, 600));
-            _garageHandler.ParkVehicle(new Boat("GHI789", "Buster", Color.Green, 5));
-            _garageHandler.ParkVehicle(new Bus("JKL012", "Scania", Color.Yellow, true));
-            _garageHandler.ParkVehicle(new Airplane("MNO345", "Boeing", Color.White, 150));
-           // IEnumerable<Vehicle> allVehicles = _garageHandler.ReturnAllVehicles();
-            //_ui.PrintAllVehicles(allVehicles); // Skriver ut alla fordon i garaget
         }
     }
 }
+
