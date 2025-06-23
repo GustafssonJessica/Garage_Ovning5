@@ -32,6 +32,7 @@ namespace Garage_Ovning5
             return ReturnInt(message);
         }
 
+        // Metod för att returnera en sträng från användaren som inte är null/tom eller endast innehåller blanksteg
         public string ReturnString(string message)
         {
             Console.WriteLine(message);
@@ -49,6 +50,7 @@ namespace Garage_Ovning5
             } while (true);
         }
 
+        // Metod för att returnera en char från användaren, validerar att det endast är ett tecken 
         public char ReturnChar(string message)
         {
             do
@@ -66,6 +68,7 @@ namespace Garage_Ovning5
             } while (true);
         }
 
+        // Metod för att returnera ett heltal från användaren, validerar att det är ett positivt heltal
         public int ReturnInt(string message)
         {
             int result;
@@ -210,6 +213,7 @@ namespace Garage_Ovning5
             length = ReturnInt("Ange båtens längd: ");
         }
 
+        // Metod för att hämta information om motorcykel
         public void GetMotorCycleInfo(out string regNumber, out string brand, out Color vehicleColor, out int cylinderVolume)
         {
             GetVehicleInfo(out regNumber, out brand, out vehicleColor);

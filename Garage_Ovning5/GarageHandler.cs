@@ -29,7 +29,7 @@ namespace Garage_Ovning5
         //Metod för att parkera ett fordon i garaget
         public bool ParkVehicle(Vehicle vehicle)
         {
-            //Funktion för att jämföra om vehiclen som skickas med har ett unikt registreringsnummer
+            //Funktion för att jämföra om fordonet som skickas med har ett unikt registreringsnummer
             if (_garage!.Any(v => v != null && v.RegistrationNumber.Equals(vehicle.RegistrationNumber, StringComparison.OrdinalIgnoreCase)))
             {
                 return false;
@@ -66,6 +66,7 @@ namespace Garage_Ovning5
             return _garage.GetAllVehicles();
         }
 
+        // Metod för att hämta fordon i garaget baserat på olika kriterier
         public IEnumerable<Vehicle> SearchVehicles(string type, string regNumber, Color? color, string brand)
         {
             if (string.IsNullOrEmpty(type) && string.IsNullOrEmpty(regNumber) && color == null && string.IsNullOrEmpty(brand))
@@ -76,7 +77,7 @@ namespace Garage_Ovning5
         }
 
 
-        //Metod för att kontrollera om garaget finns och har skapats
+        // Metod för att kontrollera om garaget finns och har skapats
         public bool CheckIfGarageExists()
         {
             if (_garage == null)

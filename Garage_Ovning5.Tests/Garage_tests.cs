@@ -1,5 +1,6 @@
 ﻿using Garage_Ovning5.Vehicles;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 
 namespace Garage_Ovning5.Tests
 {
@@ -61,6 +62,18 @@ namespace Garage_Ovning5.Tests
             Assert.DoesNotContain(vehicles, v => v.Brand == "Toyota");
         }
 
+        // Test för att se att metoden GetAllVehicles returnerar alla fordon i garaget
+        [Fact]
+        public void GetAllVehicles_5ParkedVehicles_Returns5Vehicles()
+        {
+            // Arrange
+            Garage<Vehicle> garage = new Garage<Vehicle>(10);
+            garage.Park5Vehicles();
+            // Act
+            var result = garage.GetAllVehicles();
+            // Assert
+            Assert.Equal(5, result.Count());
+        }
 
         // Test för att se att man kan radera ett fordon från garaget
         [Fact]
